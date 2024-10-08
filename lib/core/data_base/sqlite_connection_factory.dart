@@ -7,8 +7,8 @@ import 'package:sqflite/sqflite.dart';
 import 'data_base.dart';
 
 class SqliteConnectionFactory {
-  static const _VERSION = 3;
-  static const _DATABASE_NAME = 'MORMACO_APP';
+  static const _VERSION = 1;
+  static const _DATABASE_NAME = 'DATA_GRAB';
 
   static SqliteConnectionFactory? _instance;
 
