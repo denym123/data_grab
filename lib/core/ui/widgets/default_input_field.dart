@@ -31,7 +31,7 @@ class DefaultInputField extends StatelessWidget {
           padding: EdgeInsets.fromLTRB(0, 0, 0, 2.h),
           child: Text(
             label,
-            style: context.textStyles.regular.copyWith(
+            style: context.textStyles.bold.copyWith(
               fontSize: 14.sp,
             ),
           ),
@@ -40,6 +40,9 @@ class DefaultInputField extends StatelessWidget {
             valueListenable: _obscureTextVN,
             builder: (_, obscureTextVNValue, child) {
               return TextFormField(
+                onTapOutside: (event) {
+                  FocusScope.of(context).unfocus();
+                },
                 controller: controller,
                 inputFormatters: masks != null
                     ? [
@@ -53,7 +56,7 @@ class DefaultInputField extends StatelessWidget {
                 autovalidateMode: AutovalidateMode.onUserInteraction,
                 obscureText: obscureTextVNValue,
                 decoration: InputDecoration(
-                  fillColor: const Color(0XFFF5F9FE),
+                  fillColor: Colors.white,
                   filled: true,
                   suffixIcon: obscureText
                       ? Padding(
@@ -78,14 +81,20 @@ class DefaultInputField extends StatelessWidget {
                       : null,
                   contentPadding: EdgeInsets.fromLTRB(24.w, 18.h, 24.w, 18.h),
                   border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(4.r),
+                    borderRadius: BorderRadius.circular(12.r),
                     borderSide: BorderSide(width: 1.w),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(
+                      12.r,
+                    ),
+                    borderSide: BorderSide(width: 1.w, color: context.colors.dark3),
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(
-                      4.r,
+                      12.r,
                     ),
-                    borderSide: BorderSide(width: 1.w),
+                    borderSide: BorderSide(width: 3.w, color: context.colors.primary,),
                   ),
                 ),
               );

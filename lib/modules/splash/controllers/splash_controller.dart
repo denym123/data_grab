@@ -13,7 +13,7 @@ abstract class SplashControllerBase with Store, ControllerLifeCycle {
   }
 
   @action
-  void init() async {
+  Future<void> init() async {
     await Future.delayed(const Duration(seconds: 2));
     AppRoutes.goToLogin();
   }

@@ -2,7 +2,6 @@ export 'life_cycle/life_cycle.dart';
 export 'extensions/extensions.dart';
 export 'ui/ui.dart';
 export 'routes/routes.dart';
-export 'network/network.dart';
 export 'enums/enums.dart';
 export 'exceptions/exceptions.dart';
 export 'handlers/handlers.dart';
