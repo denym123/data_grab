@@ -46,6 +46,7 @@ class LoginPageState extends PageLifeCycleState<LoginController, LoginPage>
                 builder: (context) {
                   return PrimaryButton(
                     label: "Entrar",
+                    isLoading: controller.isLoading,
                     onPressed: controller.save,
                   );
                 },

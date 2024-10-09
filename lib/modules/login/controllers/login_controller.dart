@@ -30,7 +30,7 @@ abstract class LoginControllerBase with Store, ControllerLifeCycle {
       _localSecureStorage.write(
           LocalStorageConstants.USER_DOCUMENT, cpfController.text)
     ]).then((value) {
-      print("save");
+      AppRoutes.goToHome();
     },).whenComplete((){
       isLoading = false;
     });

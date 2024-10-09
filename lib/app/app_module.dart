@@ -1,3 +1,4 @@
+import 'package:data_grab/modules/home/home.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 import '../core/core.dart';
@@ -14,5 +15,6 @@ class AppModule extends Module {
   void routes(RouteManager r) {
     r.module(Modular.initialRoute, module: SplashModule());
     r.module(Routes.login, module: LoginModule());
+    r.module(Routes.home, module: HomeModule());
   }
 }
