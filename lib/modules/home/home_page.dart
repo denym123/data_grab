@@ -17,7 +17,11 @@ class HomePageState extends PageLifeCycleState<HomeController, HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const DefaultAppBar(title: "Todas entregas"),
+      drawer: DefaultDrawer(),
+      appBar: const DefaultAppBar(
+        title: "Todas entregas",
+        hasDrawer: true,
+      ),
       body: Padding(
         padding: EdgeInsets.fromLTRB(16.w, 16.h, 16.w, 0),
         child: Observer(builder: (context) {
@@ -30,7 +34,7 @@ class HomePageState extends PageLifeCycleState<HomeController, HomePage> {
                     label: "Nova entrega",
                     backgroundColor: context.colors.primary,
                     icon: Icons.add,
-                    onPressed: () {},
+                    onPressed: AppRoutes.goToDelivery,
                   ),
                   DefaultButton(
                     label: "Exportar",

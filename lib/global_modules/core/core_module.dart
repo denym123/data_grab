@@ -7,5 +7,6 @@ class CoreModule extends Module {
   @override
   void exportedBinds(Injector i) {
     i.addLazySingleton<LocalSecureStorage>(FlutterSecureStorageImpl.new);
+    i.addSingleton(UserStore.new);
   }
 }

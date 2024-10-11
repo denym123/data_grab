@@ -27,7 +27,7 @@ class DefaultButton extends StatelessWidget {
         ),
         minimumSize: Size(0, 48.h),
       ),
-      onPressed: () {},
+      onPressed: onPressed,
       child: Row(
         children: [
           Text(label),

@@ -12,4 +12,8 @@ class AppRoutes {
   static void goToHome() {
     Modular.to.navigate(Routes.home);
   }
+
+  static void goToDelivery() {
+    Modular.to.pushNamed(Routes.delivery);
+  }
 }

@@ -12,4 +12,5 @@ export 'mixins/mixins.dart';
 export 'helpers/helpers.dart';
 export 'utils/utils.dart';
 export 'local_storage/local_storage.dart';
+export 'models/models.dart';
 export 'stores/stores.dart';
