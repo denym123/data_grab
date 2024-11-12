@@ -65,7 +65,12 @@ class _ResponsibleAddressState extends State<ResponsibleAddress>
                 Row(
                   children: [
                     Expanded(
-                      child: HollowButton(label: "Anterior", onPressed: () {}),
+                      child: HollowButton(label: "Anterior", onPressed: () {
+                        widget.controller.pageController.previousPage(
+                          duration: const Duration(milliseconds: 100),
+                          curve: Curves.bounceIn,
+                        );
+                      }),
                     ),
                     SizedBox(width: 24.h),
                     Expanded(

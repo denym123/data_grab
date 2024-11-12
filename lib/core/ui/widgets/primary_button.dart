@@ -24,7 +24,7 @@ class PrimaryButton extends StatelessWidget {
       style: style ??
             context.styles.primaryButton.style?.copyWith(
             minimumSize: WidgetStateProperty.all<Size>(
-              Size(width ?? double.infinity, height ?? 48.h),
+              Size(width ?? double.infinity, height ?? 64.h),
             ),
           ),
       child:  Text(label),

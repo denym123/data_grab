@@ -37,6 +37,9 @@ abstract class DeliveryControllerBase with Store, ControllerLifeCycle {
   ObservableList<OptionModel> races = ObservableList<OptionModel>();
 
   @observable
+  ObservableList<DependentModel> dependents  = ObservableList<DependentModel>();
+
+  @observable
   PageController pageController = PageController();
 
   @observable
@@ -73,6 +76,13 @@ abstract class DeliveryControllerBase with Store, ControllerLifeCycle {
   @action
   void setRace(OptionModel? value) {
     race = value;
+  }
+
+
+  @action
+  Future<void> getDependents() async {
+    //var list = await _deliveryRepository.getDependents();
+    //dependents.addAll(list);
   }
 
   @action

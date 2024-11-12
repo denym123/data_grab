@@ -81,10 +81,6 @@ class _ResponsibleDataState extends State<ResponsibleData> with FormValidator {
                   Row(
                     children: [
                       Expanded(
-                        child: HollowButton(label: "Anterior", onPressed: () {}),
-                      ),
-                      SizedBox(width: 24.h),
-                      Expanded(
                         child: PrimaryButton(
                             label: "Próximo",
                             isLoading: false,
