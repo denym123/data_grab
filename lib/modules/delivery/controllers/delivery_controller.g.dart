@@ -25,6 +25,108 @@ mixin _$DeliveryController on DeliveryControllerBase, Store {
     });
   }
 
+  late final _$dependentsAtom =
+      Atom(name: 'DeliveryControllerBase.dependents', context: context);
+
+  @override
+  ObservableList<DependentModel> get dependents {
+    _$dependentsAtom.reportRead();
+    return super.dependents;
+  }
+
+  @override
+  set dependents(ObservableList<DependentModel> value) {
+    _$dependentsAtom.reportWrite(value, super.dependents, () {
+      super.dependents = value;
+    });
+  }
+
+  late final _$dependentNameControllerAtom = Atom(
+      name: 'DeliveryControllerBase.dependentNameController', context: context);
+
+  @override
+  TextEditingController get dependentNameController {
+    _$dependentNameControllerAtom.reportRead();
+    return super.dependentNameController;
+  }
+
+  @override
+  set dependentNameController(TextEditingController value) {
+    _$dependentNameControllerAtom
+        .reportWrite(value, super.dependentNameController, () {
+      super.dependentNameController = value;
+    });
+  }
+
+  late final _$dependentDocumentControllerAtom = Atom(
+      name: 'DeliveryControllerBase.dependentDocumentController',
+      context: context);
+
+  @override
+  TextEditingController get dependentDocumentController {
+    _$dependentDocumentControllerAtom.reportRead();
+    return super.dependentDocumentController;
+  }
+
+  @override
+  set dependentDocumentController(TextEditingController value) {
+    _$dependentDocumentControllerAtom
+        .reportWrite(value, super.dependentDocumentController, () {
+      super.dependentDocumentController = value;
+    });
+  }
+
+  late final _$dependentBirthDayControllerAtom = Atom(
+      name: 'DeliveryControllerBase.dependentBirthDayController',
+      context: context);
+
+  @override
+  TextEditingController get dependentBirthDayController {
+    _$dependentBirthDayControllerAtom.reportRead();
+    return super.dependentBirthDayController;
+  }
+
+  @override
+  set dependentBirthDayController(TextEditingController value) {
+    _$dependentBirthDayControllerAtom
+        .reportWrite(value, super.dependentBirthDayController, () {
+      super.dependentBirthDayController = value;
+    });
+  }
+
+  late final _$dependentSexAtom =
+      Atom(name: 'DeliveryControllerBase.dependentSex', context: context);
+
+  @override
+  OptionModel? get dependentSex {
+    _$dependentSexAtom.reportRead();
+    return super.dependentSex;
+  }
+
+  @override
+  set dependentSex(OptionModel? value) {
+    _$dependentSexAtom.reportWrite(value, super.dependentSex, () {
+      super.dependentSex = value;
+    });
+  }
+
+  late final _$dependentNationalityAtom = Atom(
+      name: 'DeliveryControllerBase.dependentNationality', context: context);
+
+  @override
+  OptionModel? get dependentNationality {
+    _$dependentNationalityAtom.reportRead();
+    return super.dependentNationality;
+  }
+
+  @override
+  set dependentNationality(OptionModel? value) {
+    _$dependentNationalityAtom.reportWrite(value, super.dependentNationality,
+        () {
+      super.dependentNationality = value;
+    });
+  }
+
   late final _$pageControllerAtom =
       Atom(name: 'DeliveryControllerBase.pageController', context: context);
 
@@ -203,6 +305,14 @@ mixin _$DeliveryController on DeliveryControllerBase, Store {
     });
   }
 
+  late final _$getDependentsAsyncAction =
+      AsyncAction('DeliveryControllerBase.getDependents', context: context);
+
+  @override
+  Future<void> getDependents() {
+    return _$getDependentsAsyncAction.run(() => super.getDependents());
+  }
+
   late final _$loadRacesAsyncAction =
       AsyncAction('DeliveryControllerBase.loadRaces', context: context);
 
@@ -226,9 +336,26 @@ mixin _$DeliveryController on DeliveryControllerBase, Store {
   }
 
   @override
+  void addDependent() {
+    final _$actionInfo = _$DeliveryControllerBaseActionController.startAction(
+        name: 'DeliveryControllerBase.addDependent');
+    try {
+      return super.addDependent();
+    } finally {
+      _$DeliveryControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 races: ${races},
+dependents: ${dependents},
+dependentNameController: ${dependentNameController},
+dependentDocumentController: ${dependentDocumentController},
+dependentBirthDayController: ${dependentBirthDayController},
+dependentSex: ${dependentSex},
+dependentNationality: ${dependentNationality},
 pageController: ${pageController},
 nameController: ${nameController},
 documentController: ${documentController},

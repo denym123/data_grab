@@ -1,6 +1,8 @@
 import 'package:data_grab/core/json/json.dart';
 import 'package:data_grab/modules/delivery/delivery.dart';
+import 'package:data_grab/modules/delivery/dtos/save_family_request_dto.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
 
 import '../../../core/core.dart';
@@ -12,10 +14,10 @@ class DeliveryController = DeliveryControllerBase with _$DeliveryController;
 
 abstract class DeliveryControllerBase with Store, ControllerLifeCycle {
   final DeliveryRepository _deliveryRepository;
+  final UserStore _userStore = Modular.get<UserStore>();
 
   DeliveryControllerBase({required DeliveryRepository deliveryRepository})
       : _deliveryRepository = deliveryRepository;
-
 
   //id INTEGER
   // name TEXT
@@ -32,12 +34,27 @@ abstract class DeliveryControllerBase with Store, ControllerLifeCycle {
     loadRaces();
   }
 
-
   @observable
   ObservableList<OptionModel> races = ObservableList<OptionModel>();
 
   @observable
-  ObservableList<DependentModel> dependents  = ObservableList<DependentModel>();
+  ObservableList<DependentModel> dependents = ObservableList<DependentModel>();
+
+  @observable
+  TextEditingController dependentNameController = TextEditingController();
+
+  @observable
+  TextEditingController dependentDocumentController = TextEditingController();
+
+  @observable
+  TextEditingController dependentBirthDayController = TextEditingController();
+
+
+  @observable
+  OptionModel? dependentSex;
+
+  @observable
+  OptionModel? dependentNationality;
 
   @observable
   PageController pageController = PageController();
@@ -69,7 +86,6 @@ abstract class DeliveryControllerBase with Store, ControllerLifeCycle {
   @observable
   TextEditingController addressController = TextEditingController();
 
-
   @observable
   OptionModel? race;
 
@@ -78,6 +94,44 @@ abstract class DeliveryControllerBase with Store, ControllerLifeCycle {
     race = value;
   }
 
+  @action
+  void addDependent() {
+    dependents.add(DependentModel(
+      birthDay: dependentBirthDayController.text,
+      community: dependentNationality!.name,
+      document: dependentDocumentController.text,
+      name: dependentNameController.text,
+      sex: dependentSex!.name,
+    ));
+  }
+
+  @action
+  Future<void> saveFamily() async {
+
+    SaveFamilyRequestDto saveFamilyRequestDto = SaveFamilyRequestDto(
+      dependent: dependents,
+      responsible: ResponsibleModel(
+        birthday: birthDayController.text,
+        city: cityController.text,
+        community: nationalityController.text,
+        document: documentController.text,
+        name: nameController.text,
+        neighbourhood: neighborhoodController.text,
+        nationality: race!.name,
+        street: addressController.text, zip: cepController.text,
+      ),
+    );
+    var interviewer = {
+      "interviewer_name": _userStore.userModel!.name,
+      "interviewer_document": _userStore.userModel!.document,
+    };
+
+
+     await _deliveryRepository.saveFamily(interviewer).then((familyId) {
+
+     },);
+
+  }
 
   @action
   Future<void> getDependents() async {

@@ -6,52 +6,67 @@ import 'migrations.dart';
 class MigrationV1 implements Migration {
   @override
   void create(Batch batch) {
-    batch.execute(
-      '''
-      CREATE TABLE IF NOT EXISTS ${Tables.deliveries} (
+    batch.execute('''
+      CREATE table person (
         id INTEGER PRIMARY KEY,
-        created_at TEXT,
-        user_name TEXT,
-        user_document TEXT,
-        responsible_id INTEGER,
-        FOREIGN KEY(responsible_id) REFERENCES ${Tables.responsibles}(id)
-        );
-      '''
-    );
+        name TEXT,
+        document TEXT,
+        birthday TEXT,
+        sex TEXT,
+        is_parent INTEGER,
+        ethnicity TEXT,
+        community TEXT,
+        zip TEXT,
+        city TEXT,
+        street TEXT,
+        family_id INTEGER,
+        FOREIGN KEY(family_id) REFERENCES family(id));
+    ''');
 
-    batch.execute(
-      '''
-      CREATE TABLE IF NOT EXISTS ${Tables.responsibles} (
+    batch.execute('''
+      CREATE table family (
         id INTEGER PRIMARY KEY,
-        name TEXT,
-        document TEXT,
-        birthday TEXT,
-        nacionality TEXT,
-        marital_status TEXT,
-        race TEXT,
-        contact TEXT,
-        address TEXT,
-        comunity TEXT,
-        city TEXT
-      );
-      '''
-    );
-    batch.execute(
-      '''
-      CREATE TABLE IF NOT EXISTS ${Tables.dependents} (
-        id INTEGER PRIMARY KEY,
-        name TEXT,
-        document TEXT,
-        birthday TEXT,
-        responsible_id INTEGER,
-        race TEXT,
-        nacionality TEXT
-        FOREIGN KEY(responsible_id) REFERENCES ${Tables.responsibles}(id)
-        );
-      '''
-    );
+        interviewer_name TEXT,
+        interviewer_document TEXT);
+    ''');
   }
 
   @override
-  void update(Batch batch) {}
+  void update(Batch batch) {
+    batch.execute('''
+      CREATE table person (
+        id INTEGER PRIMARY KEY,
+        name TEXT,
+        document TEXT,
+        birthday TEXT,
+        sex TEXT,
+        is_parent INTEGER,
+        ethnicity TEXT,
+        community TEXT,
+        zip TEXT,
+        city TEXT,
+        street TEXT,
+        family_id INTEGER,
+        FOREIGN KEY(family_id) REFERENCES family(id) );
+    ''');
+
+    batch.execute('''
+      CREATE table family (
+        id INTEGER PRIMARY KEY,
+        interviewer_name TEXT,
+        interviewer_document TEXT);
+    ''');
+  }
 }
+
+
+//Nome
+//Documento
+//Data de Nascimento
+//Sexo
+//Etnia
+//Comunidade
+//CEP
+//Cidade
+//Bairro
+//Rua

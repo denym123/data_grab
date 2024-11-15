@@ -1,17 +1,17 @@
 class DependentModel {
-  int id;
+  int? id;
   String name;
   String document;
   String birthDay;
-  String nationality;
-  String comunity;
+  String sex;
+  String community;
 
   DependentModel({
-    required this.id,
+    this.id,
     required this.name,
     required this.document,
     required this.birthDay,
-    required this.nationality,
-    required this.comunity,
+    required this.sex,
+    required this.community,
   });
 }
