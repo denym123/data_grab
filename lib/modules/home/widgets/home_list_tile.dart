@@ -3,21 +3,22 @@ import 'package:flutter/material.dart';
 
 class HomeListTile extends StatelessWidget {
   final VoidCallback onPressed;
-  final String title;
-  final String subTitle;
-  final int dependentNumber;
+  final String? responsibleName;
+  final String? responsibleDocument;
+  final List<String>? children;
 
   const HomeListTile(
       {super.key,
       required this.onPressed,
-      required this.title,
-      required this.subTitle,
-      required this.dependentNumber});
+      required this.responsibleName,
+      required this.responsibleDocument, this.children,
+      });
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
+        padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
         minimumSize: Size(double.infinity, 48.h),
         backgroundColor: Colors.white,
         foregroundColor: Colors.black,
@@ -30,19 +31,50 @@ class HomeListTile extends StatelessWidget {
         ),
       ),
       onPressed: onPressed,
-      child: Row(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Column(
+          Row(
             children: [
               Text(
-                title,
-                style: context.textStyles.bold,
+                "Responsável: ",
+                style: context.textStyles.medium.copyWith(
+                  fontWeight: FontWeight.w900,
+                ),
               ),
-              Text(subTitle),
+              Text(
+                responsibleName ?? "",
+                style: context.textStyles.medium,
+              ),
             ],
           ),
-          Text(
-            "${dependentNumber ?? ""}",
+          Row(
+            children: [
+              Text(
+                "Documento: ",
+                style: context.textStyles.medium.copyWith(
+                  fontWeight: FontWeight.w900,
+                ),
+              ),
+              Text(
+                responsibleDocument ?? "",
+                style: context.textStyles.medium,
+              ),
+            ],
+          ),
+          Row(
+            children: [
+              Text(
+                "Quantidade de dependentes: ",
+                style: context.textStyles.medium.copyWith(
+                  fontWeight: FontWeight.w900,
+                ),
+              ),
+              Text(
+                children?.length.toString() ?? "",
+                style: context.textStyles.medium,
+              ),
+            ],
           )
         ],
       ),

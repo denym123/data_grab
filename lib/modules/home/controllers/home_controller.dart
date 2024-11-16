@@ -13,6 +13,11 @@ abstract class HomeControllerBase with Store, ControllerLifeCycle {
   HomeControllerBase({required HomeRepository homeRepository})
       : _homeRepository = homeRepository;
 
+  @override
+  void onInit([Map<String, dynamic>? params]) {
+    fetchDeliveries();
+  }
+
   ObservableList<Delivery> deliveries = ObservableList<Delivery>();
 
   @observable

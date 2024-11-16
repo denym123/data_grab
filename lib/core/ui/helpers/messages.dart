@@ -16,6 +16,11 @@ class Messages {
         fontSize: 16.sp,
         color: Colors.white,
       ),
+      leading: Icon(
+        Icons.warning_amber_rounded,
+        color: Colors.amber,
+        size: 24.sp,
+      ),
       borderRadius: BorderRadius.circular(8.r),
       description: message,
       descriptionStyle: TextStyles.i.regular.copyWith(
@@ -36,6 +41,11 @@ class Messages {
         fontSize: 16.sp,
         color: Colors.white,
       ),
+      leading: Icon(
+        Icons.error_outline_rounded,
+        color: Colors.white,
+        size: 24.sp,
+      ),
       borderRadius: BorderRadius.circular(8.r),
       description: message,
       descriptionStyle: TextStyles.i.regular.copyWith(
@@ -55,6 +65,11 @@ class Messages {
       titleStyle: TextStyles.i.semiBold.copyWith(
         fontSize: 16.sp,
         color: Colors.white,
+      ),
+      leading: Icon(
+        Icons.check_circle,
+        color: Colors.green,
+        size: 24.sp,
       ),
       borderRadius: BorderRadius.circular(8.r),
       description: message,

@@ -49,7 +49,6 @@ abstract class DeliveryControllerBase with Store, ControllerLifeCycle {
   @observable
   TextEditingController dependentBirthDayController = TextEditingController();
 
-
   @observable
   OptionModel? dependentSex;
 
@@ -102,12 +101,12 @@ abstract class DeliveryControllerBase with Store, ControllerLifeCycle {
       document: dependentDocumentController.text,
       name: dependentNameController.text,
       sex: dependentSex!.name,
+      familyId: null,
     ));
   }
 
   @action
   Future<void> saveFamily() async {
-
     SaveFamilyRequestDto saveFamilyRequestDto = SaveFamilyRequestDto(
       dependent: dependents,
       responsible: ResponsibleModel(
@@ -118,7 +117,9 @@ abstract class DeliveryControllerBase with Store, ControllerLifeCycle {
         name: nameController.text,
         neighbourhood: neighborhoodController.text,
         nationality: race!.name,
-        street: addressController.text, zip: cepController.text,
+        street: addressController.text,
+        zip: cepController.text,
+        familyId: null,
       ),
     );
     var interviewer = {
@@ -126,17 +127,22 @@ abstract class DeliveryControllerBase with Store, ControllerLifeCycle {
       "interviewer_document": _userStore.userModel!.document,
     };
 
+    await _deliveryRepository.saveFamily(interviewer).then(
+      (familyId) {
+        for (DependentModel dependent in saveFamilyRequestDto.dependent!) {
+          dependent.familyId = familyId;
+        }
+        saveFamilyRequestDto.responsible?.familyId = familyId;
 
-     await _deliveryRepository.saveFamily(interviewer).then((familyId) {
-
-     },);
-
-  }
-
-  @action
-  Future<void> getDependents() async {
-    //var list = await _deliveryRepository.getDependents();
-    //dependents.addAll(list);
+        _deliveryRepository
+            .saveResponsibleAndDependents(saveFamilyRequestDto, familyId)
+            .then(
+          (value) {
+            Modular.to.pop();
+          },
+        );
+      },
+    );
   }
 
   @action

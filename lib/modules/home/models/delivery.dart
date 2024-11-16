@@ -1,25 +1,25 @@
+import 'package:data_grab/core/extensions/json_array.dart';
+
 class Delivery {
-  String createdAt;
-  String responsibleId;
-  String responsibleName;
-  String responsibleDocument;
-  int dependentNumber;
+  int? familyId;
+  String? responsibleName;
+  String? responsibleDocument;
+  List<String>? children;
+
 
   Delivery({
-    required this.responsibleId,
-    required this.createdAt,
-    required this.responsibleName,
-    required this.responsibleDocument,
-    required this.dependentNumber,
+    this.familyId,
+    this.responsibleName,
+    this.responsibleDocument,
+    this.children,
   });
 
   factory Delivery.fromJson(Map<String, dynamic> json) {
+
     return Delivery(
-      responsibleId: json['responsible_id'],
-      createdAt: json['created_at'],
-      responsibleName: json['user_name'],
-      responsibleDocument: json['user_document'],
-      dependentNumber: json['dependent_number'],
-    );
+        familyId: json['family_id'],
+        responsibleName: json['responsible_name'],
+        responsibleDocument: json['responsible_document'],
+        children: (json['children'] as String).toStringList());
   }
 }

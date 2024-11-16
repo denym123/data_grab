@@ -16,9 +16,9 @@ class DeliveryList extends StatelessWidget {
           Delivery delivery = controller.deliveries[index];
           return HomeListTile(
             onPressed: () {},
-            title: delivery.responsibleName,
-            subTitle: delivery.responsibleDocument,
-            dependentNumber: delivery.dependentNumber,
+            responsibleName: delivery.responsibleName,
+            responsibleDocument: delivery.responsibleDocument,
+            children: delivery.children,
           );
         },
         separatorBuilder: (context, index) {

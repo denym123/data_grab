@@ -1,20 +1,22 @@
 class ResponsibleModel {
-  final int? id;
-  final String name;
-  final String document;
-  final String birthday;
-  final String nationality;
-  final String? community;
-  final String? zip;
-  final String city;
-  final String neighbourhood;
-  final String street;
+  int? id;
+  int? familyId;
+  String name;
+  String document;
+  String birthday;
+  String nationality;
+  String? community;
+  String? zip;
+  String city;
+  String neighbourhood;
+  String street;
 
   ResponsibleModel({
     required this.neighbourhood,
     this.id,
     required this.nationality,
     required this.birthday,
+    required this.familyId,
     required this.community,
     required this.zip,
     required this.city,

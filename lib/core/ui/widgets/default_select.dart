@@ -41,6 +41,7 @@ class DefaultSelect extends StatelessWidget {
           validator: validator,
           key: dropdownKey,
           dropdownButtonProps: DropdownButtonProps(
+            autofocus: false,
             icon: Icon(
               Icons.keyboard_arrow_down,
               size: 20.sp,
@@ -80,6 +81,7 @@ class DefaultSelect extends StatelessWidget {
             ),
             fit: FlexFit.loose,
             searchFieldProps: TextFieldProps(
+              autofocus: false,
               decoration: context.styles.procedureTextDecoration.copyWith(
                 hintText: hint,
                 prefixIcon: Icon(
@@ -106,7 +108,10 @@ class DefaultSelect extends StatelessWidget {
           itemAsString: (item) => item?.name ?? "",
           selectedItem: value,
           items: options ?? [],
-          onChanged: onChanged,
+          onChanged: (val){
+            FocusScope.of(context).requestFocus(FocusNode());
+            onChanged!(val);
+          },
         ),
       ],
     );

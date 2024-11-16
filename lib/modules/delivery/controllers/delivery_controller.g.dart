@@ -305,12 +305,12 @@ mixin _$DeliveryController on DeliveryControllerBase, Store {
     });
   }
 
-  late final _$getDependentsAsyncAction =
-      AsyncAction('DeliveryControllerBase.getDependents', context: context);
+  late final _$saveFamilyAsyncAction =
+      AsyncAction('DeliveryControllerBase.saveFamily', context: context);
 
   @override
-  Future<void> getDependents() {
-    return _$getDependentsAsyncAction.run(() => super.getDependents());
+  Future<void> saveFamily() {
+    return _$saveFamilyAsyncAction.run(() => super.saveFamily());
   }
 
   late final _$loadRacesAsyncAction =

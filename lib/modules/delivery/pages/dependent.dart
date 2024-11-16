@@ -84,7 +84,11 @@ class Dependent extends StatelessWidget {
                   label: "Finalizar",
                   isLoading: false,
                   onPressed: () {
-                    controller.saveFamily();
+                    if(controller.dependents.isNotEmpty){
+                      controller.saveFamily();
+                    } else {
+                      Messages.alert("Deve ter pelo menos um dependente cadastrado");
+                    }
                   },
                 ),
               ),
