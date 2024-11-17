@@ -14,44 +14,53 @@ class LoginPage extends StatefulWidget {
 
 class LoginPageState extends PageLifeCycleState<LoginController, LoginPage>
     with FormValidator {
+  GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.all(16.w),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SizedBox(height: 150.h),
-              Text(
-                "Insira seu nome completo e CPF para registrar seus nomes nas entregas.",
-                style: context.textStyles.bold16,
-              ),
-              SizedBox(height: 44.h),
-              DefaultInputField(
-                label: "Nome completo",
-                controller: controller.nameController,
-                validator: isNotEmpty,
-              ),
-              SizedBox(height: 16.h),
-              DefaultInputField(
-                label: "CPF",
-                controller: controller.cpfController,
-                masks: const [Masks.cpfMask],
-                validator: isDocumentValid,
-              ),
-              SizedBox(height: 32.h),
-              Observer(
-                builder: (context) {
-                  return PrimaryButton(
-                    label: "Entrar",
-                    isLoading: controller.isLoading,
-                    onPressed: controller.save,
-                  );
-                },
-              ),
-            ],
+          child: Form(
+            key: formKey,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(height: 150.h),
+                Text(
+                  "Insira seu nome completo e CPF para registrar seus nomes nas entregas.",
+                  style: context.textStyles.bold16,
+                ),
+                SizedBox(height: 44.h),
+                DefaultInputField(
+                  label: "Nome completo",
+                  controller: controller.nameController,
+                  validator: isNotEmpty,
+                ),
+                SizedBox(height: 16.h),
+                DefaultInputField(
+                  label: "CPF",
+                  controller: controller.cpfController,
+                  masks: const [Masks.cpfMask],
+                  validator: isDocumentValid,
+                ),
+                SizedBox(height: 32.h),
+                Observer(
+                  builder: (context) {
+                    return PrimaryButton(
+                      label: "Entrar",
+                      isLoading: controller.isLoading,
+                      onPressed: () {
+                        if (formKey.currentState!.validate()) {
+                          controller.save();
+                        }
+                      },
+                    );
+                  },
+                ),
+              ],
+            ),
           ),
         ),
       ),

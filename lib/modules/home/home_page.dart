@@ -41,7 +41,6 @@ class HomePageState extends PageLifeCycleState<HomeController, HomePage> {
                     backgroundColor: Colors.blue,
                     icon: Icons.upload_file_rounded,
                     onPressed: () {
-                      controller.fetchDeliveries();
                     },
                   ),
                 ],
