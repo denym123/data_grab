@@ -16,7 +16,7 @@ class DeliveryList extends StatelessWidget {
         },
         child: controller.deliveries.isNotEmpty
             ? ListView.separated(
-                shrinkWrap: true,
+                shrinkWrap: false,
                 itemBuilder: (context, index) {
                   Delivery delivery = controller.deliveries[index];
                   return HomeListTile(
@@ -31,17 +31,23 @@ class DeliveryList extends StatelessWidget {
                 },
                 itemCount: controller.deliveries.length,
               )
-            : Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                mainAxisSize: MainAxisSize.max,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Image.asset(Assets.imagesNotFound, height: 20.h),
-                  Text(
-                    "Nenhuma entrega",
-                    style: context.textStyles.semiBold,
-                  ),
-                ],
+            : SingleChildScrollView(
+                physics: const BouncingScrollPhysics(),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.max,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Image.asset(
+                      Assets.imagesNotFound,
+                      fit: BoxFit.contain,
+                    ),
+                    Text(
+                      "Nenhuma entrega",
+                      style: context.textStyles.semiBold16,
+                    ),
+                  ],
+                ),
               ),
       ),
     );

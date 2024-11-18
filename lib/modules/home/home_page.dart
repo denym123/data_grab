@@ -40,7 +40,9 @@ class HomePageState extends PageLifeCycleState<HomeController, HomePage> {
                     label: "Exportar",
                     backgroundColor: Colors.blue,
                     icon: Icons.upload_file_rounded,
-                    onPressed: () {},
+                    onPressed: () {
+                      controller.deliveries.clear();
+                    },
                   ),
                 ],
               ),
