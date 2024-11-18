@@ -2,16 +2,5 @@
 class Assets {
   Assets._();
 
-  static const String iconsForum = 'assets/icons/forum.png';
-  static const String imagesIllustration = 'assets/images/illustration.png';
-  static const String imagesIllustrationResized =
-      'assets/images/illustration_resized.png';
-  static const String imagesIlustrationMischaracterized =
-      'assets/images/ilustration_mischaracterized.png';
-  static const String imagesLogoMormaco = 'assets/images/logo_mormaco.png';
-  static const String imagesSurveyIlustration =
-      'assets/images/survey_ilustration.png';
-  static const String messagesAlert = 'assets/icons/messages/alert.png';
-  static const String messagesError = 'assets/icons/messages/error.png';
-  static const String messagesSuccess = 'assets/icons/messages/success.png';
+  static const String imagesNotFound = 'assets/images/not_found.png';
 }

@@ -40,24 +40,12 @@ class HomePageState extends PageLifeCycleState<HomeController, HomePage> {
                     label: "Exportar",
                     backgroundColor: Colors.blue,
                     icon: Icons.upload_file_rounded,
-                    onPressed: () {
-                    },
+                    onPressed: () {},
                   ),
                 ],
               ),
               SizedBox(height: 16.h),
-              controller.deliveries.isEmpty
-                  ? const Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        mainAxisSize: MainAxisSize.max,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Text("Nenhuma entrega"),
-                        ],
-                      ),
-                    )
-                  : DeliveryList(controller: controller),
+              DeliveryList(controller: controller),
             ],
           );
         }),
