@@ -77,9 +77,9 @@ class _DependentModalState extends State<DependentModal> with FormValidator {
                     SizedBox(height: 16.h),
                     DefaultSelect(
                       onChanged: (value) {
-                        widget.controller.dependentNationality = value;
+                        widget.controller.dependentCommunity = value;
                       },
-                      value: widget.controller.dependentNationality,
+                      value: widget.controller.dependentCommunity,
                       options: widget.controller.races,
                       label: "Etnia",
                     ),

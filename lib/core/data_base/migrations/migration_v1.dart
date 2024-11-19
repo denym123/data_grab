@@ -14,11 +14,11 @@ class MigrationV1 implements Migration {
         birthday TEXT,
         sex TEXT,
         is_parent INTEGER,
-        ethnicity TEXT,
+        nationality TEXT,
         community TEXT,
         zip TEXT,
         city TEXT,
-        neighbourhood TEXT,
+        neighborhood TEXT,
         street TEXT,
         number TEXT,
         family_id INTEGER,
@@ -43,13 +43,15 @@ class MigrationV1 implements Migration {
         birthday TEXT,
         sex TEXT,
         is_parent INTEGER,
-        ethnicity TEXT,
+        nationality TEXT,
         community TEXT,
         zip TEXT,
         city TEXT,
+        neighborhood TEXT,
         street TEXT,
+        number TEXT,
         family_id INTEGER,
-        FOREIGN KEY(family_id) REFERENCES family(id) );
+        FOREIGN KEY(family_id) REFERENCES family(id));
     ''');
 
     batch.execute('''

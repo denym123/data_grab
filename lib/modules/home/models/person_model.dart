@@ -4,21 +4,23 @@ class PersonModel {
   String? document;
   String? birthday;
   String? sex;
+  String? nationality;
   int? isParent;
-  String? ethnicity;
   String? community;
   String? zip;
   String? city;
   String? street;
-
+  String? neighborhood;
   PersonModel({
+    this.nationality,
     this.id,
     this.name,
     this.document,
     this.birthday,
     this.sex,
     this.isParent,
-    this.ethnicity,
+    this.street,
+    this.neighborhood,
     this.community,
     this.zip,
     this.city,
@@ -30,11 +32,14 @@ class PersonModel {
       name: json['name'],
       document: json['document'],
       birthday: json['birthday'],
+      community: json['community'],
+      nationality: json['nationality'],
       sex: json['sex'],
       isParent: json['is_parent'],
-      community: json['community'],
       zip: json['zip'],
       city: json['city'],
+      street: json['street'],
+      neighborhood: json['neighborhood'],
     );
   }
 }

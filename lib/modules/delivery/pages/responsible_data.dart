@@ -84,11 +84,11 @@ class _ResponsibleDataState extends State<ResponsibleData> with FormValidator {
                   ),
                   SizedBox(height: 24.h),
                   DefaultSelect(
-                    value: widget.controller.race,
+                    value: widget.controller.community,
                     options: widget.controller.races,
                     label: "Etnia",
                     onChanged: (p0) {
-                      widget.controller.race = p0;
+                      widget.controller.community = p0;
                     },
                   ),
                   SizedBox(height: 32.h),

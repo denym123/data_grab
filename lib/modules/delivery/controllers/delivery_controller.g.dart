@@ -110,20 +110,19 @@ mixin _$DeliveryController on DeliveryControllerBase, Store {
     });
   }
 
-  late final _$dependentNationalityAtom = Atom(
-      name: 'DeliveryControllerBase.dependentNationality', context: context);
+  late final _$dependentCommunityAtom =
+      Atom(name: 'DeliveryControllerBase.dependentCommunity', context: context);
 
   @override
-  OptionModel? get dependentNationality {
-    _$dependentNationalityAtom.reportRead();
-    return super.dependentNationality;
+  OptionModel? get dependentCommunity {
+    _$dependentCommunityAtom.reportRead();
+    return super.dependentCommunity;
   }
 
   @override
-  set dependentNationality(OptionModel? value) {
-    _$dependentNationalityAtom.reportWrite(value, super.dependentNationality,
-        () {
-      super.dependentNationality = value;
+  set dependentCommunity(OptionModel? value) {
+    _$dependentCommunityAtom.reportWrite(value, super.dependentCommunity, () {
+      super.dependentCommunity = value;
     });
   }
 
@@ -321,19 +320,19 @@ mixin _$DeliveryController on DeliveryControllerBase, Store {
     });
   }
 
-  late final _$raceAtom =
-      Atom(name: 'DeliveryControllerBase.race', context: context);
+  late final _$communityAtom =
+      Atom(name: 'DeliveryControllerBase.community', context: context);
 
   @override
-  OptionModel? get race {
-    _$raceAtom.reportRead();
-    return super.race;
+  OptionModel? get community {
+    _$communityAtom.reportRead();
+    return super.community;
   }
 
   @override
-  set race(OptionModel? value) {
-    _$raceAtom.reportWrite(value, super.race, () {
-      super.race = value;
+  set community(OptionModel? value) {
+    _$communityAtom.reportWrite(value, super.community, () {
+      super.community = value;
     });
   }
 
@@ -387,7 +386,7 @@ dependentNameController: ${dependentNameController},
 dependentDocumentController: ${dependentDocumentController},
 dependentBirthDayController: ${dependentBirthDayController},
 dependentSex: ${dependentSex},
-dependentNationality: ${dependentNationality},
+dependentCommunity: ${dependentCommunity},
 pageController: ${pageController},
 sex: ${sex},
 nameController: ${nameController},
@@ -400,7 +399,7 @@ cepController: ${cepController},
 cityController: ${cityController},
 neighborhoodController: ${neighborhoodController},
 addressController: ${addressController},
-race: ${race}
+community: ${community}
     ''';
   }
 }

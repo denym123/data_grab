@@ -1,7 +1,9 @@
 import 'dart:io';
 
 import 'package:data_grab/modules/home/home.dart';
+import 'package:data_grab/modules/home/models/person_model.dart';
 import 'package:excel/excel.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
 import 'package:open_filex/open_filex.dart';
 import 'package:path_provider/path_provider.dart';
@@ -36,6 +38,7 @@ abstract class HomeControllerBase with Store, ControllerLifeCycle {
 
     var excel = Excel.createExcel();
     var sheet = excel['Deliveries'];
+    excel.delete("Sheet1");
 
     // Estilização para cabeçalho
     CellStyle headerStyle = CellStyle(
@@ -51,8 +54,8 @@ abstract class HomeControllerBase with Store, ControllerLifeCycle {
       "documento",
       "data de nascimento",
       "sexo",
+      "nacionalidade",
       "parentesco",
-      "etnia",
       "comunidade",
       "cep",
       "cidade",
@@ -72,7 +75,7 @@ abstract class HomeControllerBase with Store, ControllerLifeCycle {
 
     // Itera sobre as entregas e preenche os dados
     for (var delivery in deliveries) {
-      for (var child in delivery.children) {
+      for (PersonModel child in delivery.children) {
         sheet
             .cell(CellIndex.indexByColumnRow(
                 columnIndex: 0, rowIndex: currentRow))
@@ -80,44 +83,55 @@ abstract class HomeControllerBase with Store, ControllerLifeCycle {
         sheet
             .cell(CellIndex.indexByColumnRow(
                 columnIndex: 1, rowIndex: currentRow))
-            .value = TextCellValue(child.name ?? '');
+            .value = TextCellValue(child.name ?? 'N/I');
         sheet
             .cell(CellIndex.indexByColumnRow(
                 columnIndex: 2, rowIndex: currentRow))
-            .value = TextCellValue(child.document ?? '');
+            .value = TextCellValue(child.document ?? 'N/I');
         sheet
             .cell(CellIndex.indexByColumnRow(
                 columnIndex: 3, rowIndex: currentRow))
-            .value = TextCellValue(child.sex ?? '');
+            .value = TextCellValue(child.birthday ?? 'N/I');
+        sheet
+            .cell(CellIndex.indexByColumnRow(
+                columnIndex: 4, rowIndex: currentRow))
+            .value = TextCellValue(child.sex ?? 'N/I');
+        sheet
+            .cell(CellIndex.indexByColumnRow(
+                columnIndex: 5, rowIndex: currentRow))
+            .value = TextCellValue(child.nationality ?? 'N/I');
         sheet
                 .cell(CellIndex.indexByColumnRow(
-                    columnIndex: 4, rowIndex: currentRow))
+                    columnIndex: 6, rowIndex: currentRow))
                 .value =
             TextCellValue(child.isParent == 1 ? "Responsável" : "Dependente");
         sheet
             .cell(CellIndex.indexByColumnRow(
-                columnIndex: 5, rowIndex: currentRow))
-            .value = TextCellValue(child.community ?? '');
-        sheet
-            .cell(CellIndex.indexByColumnRow(
                 columnIndex: 7, rowIndex: currentRow))
-            .value = TextCellValue(child.zip ?? '');
+            .value = TextCellValue(child.community ?? 'N/I');
         sheet
             .cell(CellIndex.indexByColumnRow(
                 columnIndex: 8, rowIndex: currentRow))
-            .value = TextCellValue(child.city ?? '');
+            .value = TextCellValue(child.zip ?? 'N/I');
         sheet
             .cell(CellIndex.indexByColumnRow(
-            columnIndex: 8, rowIndex: currentRow))
-            .value = TextCellValue(child.street ?? '');
-
+                columnIndex: 9, rowIndex: currentRow))
+            .value = TextCellValue(child.city ?? 'N/I');
+        sheet
+            .cell(CellIndex.indexByColumnRow(
+            columnIndex: 10, rowIndex: currentRow))
+            .value = TextCellValue(child.neighborhood ?? 'N/I');
+        sheet
+            .cell(CellIndex.indexByColumnRow(
+            columnIndex: 11, rowIndex: currentRow))
+            .value = TextCellValue(child.street ?? 'N/I');
         currentRow++;
       }
     }
 
     // Salva o arquivo temporário
     Directory tempDir = await getTemporaryDirectory();
-    String filePath = '${tempDir.path}/deliveries_data.xlsx';
+    String filePath = '${tempDir.path}/${Modular.get<UserStore>().userModel?.name}${DateTime.now().toIso8601String()}.xlsx';
     File(filePath).writeAsBytesSync(excel.save()!);
 
     await OpenFilex.open(filePath);

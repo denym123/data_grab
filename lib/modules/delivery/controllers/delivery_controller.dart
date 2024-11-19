@@ -54,7 +54,7 @@ abstract class DeliveryControllerBase with Store, ControllerLifeCycle {
   OptionModel? dependentSex;
 
   @observable
-  OptionModel? dependentNationality;
+  OptionModel? dependentCommunity;
 
   @observable
   PageController pageController = PageController();
@@ -93,18 +93,18 @@ abstract class DeliveryControllerBase with Store, ControllerLifeCycle {
   TextEditingController addressController = TextEditingController();
 
   @observable
-  OptionModel? race;
+  OptionModel? community;
 
   @action
   void setRace(OptionModel? value) {
-    race = value;
+    community = value;
   }
 
   @action
   void addDependent() {
     dependents.add(DependentModel(
       birthDay: dependentBirthDayController.text,
-      community: dependentNationality!.name,
+      community: dependentCommunity?.name,
       document: dependentDocumentController.text,
       name: dependentNameController.text,
       sex: dependentSex!.name,
@@ -120,11 +120,11 @@ abstract class DeliveryControllerBase with Store, ControllerLifeCycle {
         sex: sex?.name ?? '',
         birthday: birthDayController.text,
         city: cityController.text,
-        community: nationalityController.text,
+        community: community?.name ?? '',
         document: documentController.text,
         name: nameController.text,
         neighbourhood: neighborhoodController.text,
-        nationality: race?.name ?? '',
+        nationality: nationalityController.text ?? '',
         street: addressController.text,
         zip: cepController.text,
         familyId: null,
@@ -169,7 +169,7 @@ abstract class DeliveryControllerBase with Store, ControllerLifeCycle {
     dependentDocumentController.clear();
     dependentBirthDayController.clear();
     dependentSex = null;
-    dependentNationality = null;
+    dependentCommunity = null;
   }
 
 }

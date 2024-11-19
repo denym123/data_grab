@@ -18,11 +18,12 @@ class SaveFamilyRequestDto {
       "document": responsible?.document ?? '',
       "birthday": responsible?.birthday ?? '',
       "is_parent": 1,
+      "nationality": responsible?.nationality ?? '',
       "community": responsible?.community ?? '',
       "zip": responsible?.zip ?? '',
       "city": responsible?.city ?? '',
       "street": responsible?.street ?? '',
-      "neighbourhood": responsible?.neighbourhood ?? '',
+      "neighborhood": responsible?.neighbourhood ?? '',
       "sex": responsible?.sex ?? '',
       "family_id": familyId,
     });

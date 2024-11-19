@@ -33,7 +33,8 @@ GROUP BY
 
   Future<List<DeliveryExportModel>> getCompleteDeliveries() async {
     var conn = await SqliteConnectionFactory().openConnection();
-    var query = await conn.rawQuery('''
+    var query = await conn.rawQuery(
+        '''
 SELECT 
     f.id AS family_id,
     f.interviewer_name,
@@ -47,9 +48,11 @@ SELECT
         ',"sex":"' || IFNULL(p.sex, '') || '"' ||
         ',"is_parent":' || IFNULL(p.is_parent, '0') ||
         ',"community":"' || IFNULL(p.community, '') || '"' ||
+        ',"nationality":"' || IFNULL(p.nationality, '') || '"' ||
         ',"zip":"' || IFNULL(p.zip, '') || '"' ||
         ',"city":"' || IFNULL(p.city, '') || '"' ||
         ',"street":"' || IFNULL(p.street, '') || '"' ||
+        ',"neighborhood":"' || IFNULL(p.neighborhood, '') || '"' ||
         ',"family_id":' || IFNULL(p.family_id, 'null') || '}'
     ), '') || 
     ']' AS family
