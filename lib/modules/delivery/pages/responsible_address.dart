@@ -45,21 +45,26 @@ class _ResponsibleAddressState extends State<ResponsibleAddress>
                 ),
                 SizedBox(height: 16.h),
                 DefaultInputField(
-                  label: "Cidade",
+                  label: "Cidade *",
                   controller: widget.controller.cityController,
                   validator: isNotEmpty,
                 ),
                 SizedBox(height: 16.h),
                 DefaultInputField(
-                  label: "Bairro",
+                  label: "Bairro *",
                   controller: widget.controller.neighborhoodController,
                   validator: isNotEmpty,
                 ),
                 SizedBox(height: 16.h),
                 DefaultInputField(
-                  label: "Rua",
+                  label: "Rua *",
                   controller: widget.controller.addressController,
                   validator: isNotEmpty,
+                ),
+                SizedBox(height: 16.h),
+                DefaultInputField(
+                  label: "Número",
+                  controller: widget.controller.numberController,
                 ),
                 SizedBox(height: 24.h),
                 Row(

@@ -13,26 +13,24 @@ class SaveFamilyRequestDto {
 
     List<Map<String,dynamic>> people = [];
 
-
-
     people.add({
-      "name": responsible!.name,
-      "document": responsible!.document,
-      "birthday": responsible!.birthday,
+      "name": responsible?.name ?? '',
+      "document": responsible?.document ?? '',
+      "birthday": responsible?.birthday ?? '',
       "is_parent": 1,
-      "sex": responsible!.nationality,
-      "community": responsible!.community,
-      "zip": responsible!.zip,
-      "city": responsible!.city,
-      "street": responsible!.street,
+      "community": responsible?.community ?? '',
+      "zip": responsible?.zip ?? '',
+      "city": responsible?.city ?? '',
+      "street": responsible?.street ?? '',
+      "neighbourhood": responsible?.neighbourhood ?? '',
+      "sex": responsible?.sex ?? '',
       "family_id": familyId,
-
     });
 
     final dependentList = dependent!.map(
       (e) {
         return {
-          "name": e.name,
+          "name": e.name ?? '',
           "document": e.document,
           "birthday": e.birthDay,
           "sex": e.sex,

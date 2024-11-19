@@ -1,24 +1,32 @@
+import 'dart:convert';
+
+import 'package:data_grab/core/extensions/group_concat.dart';
 import 'package:data_grab/modules/home/models/person_model.dart';
+import 'package:data_grab/core/core.dart';
 
 class DeliveryExportModel {
-  final String familyId;
-  final String responsibleName;
-  final String responsibleDocument;
+  final int? familyId;
+  final String interviewerName;
+  final String interviewerDocument;
   final List<PersonModel> children;
 
   DeliveryExportModel({
     required this.familyId,
-    required this.responsibleName,
-    required this.responsibleDocument,
+    required this.interviewerName,
+    required this.interviewerDocument,
     required this.children,
   });
 
-  DeliveryExportModel.fromJson(Map<String, dynamic> json)
-      : familyId = json['family_id'],
-        responsibleName = json['responsible_name'],
-        responsibleDocument = json['responsible_document'],
-        children = (json['children'] as List<dynamic>)
-            .map((e) => PersonModel.fromJson(e))
-            .toList();
+  factory DeliveryExportModel.fromJson(Map<String, dynamic> json) {
+    return DeliveryExportModel(
+      familyId: json['family_id'],
+      interviewerName: json['interviewer_name'],
+      interviewerDocument: json['interviewer_document'],
+      children: (json['family'] as String).toJsonMapList()
+          .map((e) => PersonModel.fromJson(e))
+          .toList(),
+    );
+  }
+
 
 }

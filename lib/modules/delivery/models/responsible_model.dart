@@ -6,12 +6,14 @@ class ResponsibleModel {
   String birthday;
   String nationality;
   String? community;
+  String? sex;
   String? zip;
   String city;
   String neighbourhood;
   String street;
 
   ResponsibleModel({
+    required this.sex,
     required this.neighbourhood,
     this.id,
     required this.nationality,

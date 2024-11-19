@@ -39,13 +39,13 @@ class _ResponsibleDataState extends State<ResponsibleData> with FormValidator {
                   ),
                   SizedBox(height: 16.h),
                   DefaultInputField(
-                    label: 'Nome',
+                    label: 'Nome *',
                     controller: widget.controller.nameController,
                     validator: isNotEmpty,
                   ),
                   SizedBox(height: 24.h),
                   DefaultInputField(
-                    label: 'CPF',
+                    label: 'CPF *',
                     controller: widget.controller.documentController,
                     masks: const [Masks.cpfMask],
                     validator: isDocumentValid,
@@ -53,16 +53,34 @@ class _ResponsibleDataState extends State<ResponsibleData> with FormValidator {
                   ),
                   SizedBox(height: 24.h),
                   DefaultInputField(
-                    label: 'Data de nascimento',
+                    label: 'Data de nascimento *',
                     controller: widget.controller.birthDayController,
                     validator: isNotEmpty,
                     masks: const ['99/99/9999'],
                   ),
                   SizedBox(height: 24.h),
                   DefaultInputField(
-                    label: 'Nacionalidade',
+                    label: 'Nacionalidade *',
                     controller: widget.controller.nationalityController,
                     validator: isNotEmpty,
+                  ),
+                  SizedBox(height: 24.h),
+                  DefaultSelect(
+                    options: [
+                      OptionModel(name: "Masculino", id: 1),
+                      OptionModel(name: "Feminino", id: 2),
+                      OptionModel(name: "Outro", id: 3),
+                    ],
+                    onChanged: (value) {
+                      widget.controller.sex = value;
+                    },
+                    validator:(p0) {
+                      if(p0 == null) {
+                        return "Por favor selecione um gênero";
+                      }
+                    },
+                    value: widget.controller.sex,
+                    label: "Sexo *",
                   ),
                   SizedBox(height: 24.h),
                   DefaultSelect(
@@ -71,10 +89,6 @@ class _ResponsibleDataState extends State<ResponsibleData> with FormValidator {
                     label: "Etnia",
                     onChanged: (p0) {
                       widget.controller.race = p0;
-                    },
-                    validator: (p0) {
-                      if (p0 == null) return "Selecione uma nacionalidade";
-                      return null;
                     },
                   ),
                   SizedBox(height: 32.h),

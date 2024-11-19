@@ -1,6 +1,7 @@
 import 'package:data_grab/core/json/json.dart';
 import 'package:data_grab/modules/delivery/delivery.dart';
 import 'package:data_grab/modules/delivery/dtos/save_family_request_dto.dart';
+import 'package:data_grab/modules/home/controllers/controllers.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
@@ -59,6 +60,9 @@ abstract class DeliveryControllerBase with Store, ControllerLifeCycle {
   PageController pageController = PageController();
 
   @observable
+  OptionModel? sex;
+
+  @observable
   TextEditingController nameController = TextEditingController();
 
   @observable
@@ -69,6 +73,9 @@ abstract class DeliveryControllerBase with Store, ControllerLifeCycle {
 
   @observable
   TextEditingController nationalityController = TextEditingController();
+
+  @observable
+  TextEditingController numberController = TextEditingController();
 
   @observable
   TextEditingController contactController = TextEditingController();
@@ -110,13 +117,14 @@ abstract class DeliveryControllerBase with Store, ControllerLifeCycle {
     SaveFamilyRequestDto saveFamilyRequestDto = SaveFamilyRequestDto(
       dependent: dependents,
       responsible: ResponsibleModel(
+        sex: sex?.name ?? '',
         birthday: birthDayController.text,
         city: cityController.text,
         community: nationalityController.text,
         document: documentController.text,
         name: nameController.text,
         neighbourhood: neighborhoodController.text,
-        nationality: race!.name,
+        nationality: race?.name ?? '',
         street: addressController.text,
         zip: cepController.text,
         familyId: null,
@@ -138,6 +146,7 @@ abstract class DeliveryControllerBase with Store, ControllerLifeCycle {
             .saveResponsibleAndDependents(saveFamilyRequestDto, familyId)
             .then(
           (value) {
+            Modular.get<HomeController>().fetchDeliveries();
             Modular.to.pop();
           },
         );
@@ -154,4 +163,13 @@ abstract class DeliveryControllerBase with Store, ControllerLifeCycle {
     );
     races.addAll(list);
   }
+
+  void clearDependentFields(){
+    dependentNameController.clear();
+    dependentDocumentController.clear();
+    dependentBirthDayController.clear();
+    dependentSex = null;
+    dependentNationality = null;
+  }
+
 }

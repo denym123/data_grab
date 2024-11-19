@@ -18,7 +18,9 @@ class MigrationV1 implements Migration {
         community TEXT,
         zip TEXT,
         city TEXT,
+        neighbourhood TEXT,
         street TEXT,
+        number TEXT,
         family_id INTEGER,
         FOREIGN KEY(family_id) REFERENCES family(id));
     ''');

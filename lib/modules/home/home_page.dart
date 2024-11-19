@@ -17,40 +17,38 @@ class HomePageState extends PageLifeCycleState<HomeController, HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: DefaultDrawer(),
+      drawer: const DefaultDrawer(),
       appBar: const DefaultAppBar(
         title: "Todas entregas",
         hasDrawer: true,
       ),
       body: Padding(
         padding: EdgeInsets.fromLTRB(16.w, 16.h, 16.w, 0),
-        child: Observer(builder: (context) {
-          return Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  DefaultButton(
-                    label: "Nova entrega",
-                    backgroundColor: context.colors.primary,
-                    icon: Icons.add,
-                    onPressed: AppRoutes.goToDelivery,
-                  ),
-                  DefaultButton(
-                    label: "Exportar",
-                    backgroundColor: Colors.blue,
-                    icon: Icons.upload_file_rounded,
-                    onPressed: () {
-                      controller.deliveries.clear();
-                    },
-                  ),
-                ],
-              ),
-              SizedBox(height: 16.h),
-              DeliveryList(controller: controller),
-            ],
-          );
-        }),
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                DefaultButton(
+                  label: "Nova entrega",
+                  backgroundColor: context.colors.primary,
+                  icon: Icons.add,
+                  onPressed: AppRoutes.goToDelivery,
+                ),
+                DefaultButton(
+                  label: "Exportar",
+                  backgroundColor: Colors.blue,
+                  icon: Icons.upload_file_rounded,
+                  onPressed: () {
+                    controller.exportDeliveryDataToExcel();
+                  },
+                ),
+              ],
+            ),
+            SizedBox(height: 16.h),
+            DeliveryList(controller: controller),
+          ],
+        ),
       ),
     );
   }

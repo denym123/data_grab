@@ -1,10 +1,10 @@
 class DependentModel {
   int? id;
-  String name;
-  String document;
-  String birthDay;
-  String sex;
-  String community;
+  String? name;
+  String? document;
+  String? birthDay;
+  String? sex;
+  String? community;
   int? familyId;
 
   DependentModel({

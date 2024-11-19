@@ -143,6 +143,22 @@ mixin _$DeliveryController on DeliveryControllerBase, Store {
     });
   }
 
+  late final _$sexAtom =
+      Atom(name: 'DeliveryControllerBase.sex', context: context);
+
+  @override
+  OptionModel? get sex {
+    _$sexAtom.reportRead();
+    return super.sex;
+  }
+
+  @override
+  set sex(OptionModel? value) {
+    _$sexAtom.reportWrite(value, super.sex, () {
+      super.sex = value;
+    });
+  }
+
   late final _$nameControllerAtom =
       Atom(name: 'DeliveryControllerBase.nameController', context: context);
 
@@ -205,6 +221,22 @@ mixin _$DeliveryController on DeliveryControllerBase, Store {
     _$nationalityControllerAtom.reportWrite(value, super.nationalityController,
         () {
       super.nationalityController = value;
+    });
+  }
+
+  late final _$numberControllerAtom =
+      Atom(name: 'DeliveryControllerBase.numberController', context: context);
+
+  @override
+  TextEditingController get numberController {
+    _$numberControllerAtom.reportRead();
+    return super.numberController;
+  }
+
+  @override
+  set numberController(TextEditingController value) {
+    _$numberControllerAtom.reportWrite(value, super.numberController, () {
+      super.numberController = value;
     });
   }
 
@@ -357,10 +389,12 @@ dependentBirthDayController: ${dependentBirthDayController},
 dependentSex: ${dependentSex},
 dependentNationality: ${dependentNationality},
 pageController: ${pageController},
+sex: ${sex},
 nameController: ${nameController},
 documentController: ${documentController},
 birthDayController: ${birthDayController},
 nationalityController: ${nationalityController},
+numberController: ${numberController},
 contactController: ${contactController},
 cepController: ${cepController},
 cityController: ${cityController},
