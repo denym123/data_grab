@@ -11,13 +11,13 @@ class AppColors {
   }
 
   //Primary
-  Color get primary => const Color(0xFF1175B8);
+  Color get primary => const Color(0xFFC20000);
 
-  Color get primaryDark => const Color(0xff0e67a1);
+  Color get primaryDark => const Color(0xffFF0000);
 
-  Color get primaryLight => const Color(0xFF2391DF);
+  Color get primaryLight => const Color(0xFFF2526E);
 
-  Color get primaryLight2 => const Color(0xFF244EBA);
+  Color get primaryLight2 => const Color(0xFF860000);
 
   //Secondary
   Color get error => const Color(0xFFDF1E1E);

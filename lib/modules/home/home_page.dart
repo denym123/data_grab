@@ -37,7 +37,7 @@ class HomePageState extends PageLifeCycleState<HomeController, HomePage> {
                 ),
                 DefaultButton(
                   label: "Exportar",
-                  backgroundColor: Colors.blue,
+                  backgroundColor: Color(0xff279629),
                   icon: Icons.upload_file_rounded,
                   onPressed: () {
                     controller.exportDeliveryDataToExcel();

@@ -6,8 +6,8 @@ import 'package:data_grab/core/core.dart';
 
 class DeliveryExportModel {
   final int? familyId;
-  final String interviewerName;
-  final String interviewerDocument;
+  final String? interviewerName;
+  final String? interviewerDocument;
   final List<PersonModel> children;
 
   DeliveryExportModel({

@@ -21,6 +21,7 @@ class DeliveryPageState
           children: [
             Expanded(
               child: PageView(
+                physics: const NeverScrollableScrollPhysics(),
                 controller: controller.pageController,
                 children: [
                   ResponsibleData(controller: controller),

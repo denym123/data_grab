@@ -3,4 +3,6 @@ class Assets {
   Assets._();
 
   static const String imagesNotFound = 'assets/images/not_found.png';
+  static const String imagesLogoBrincarESonhar = 'assets/images/logo_brincaresonhar.png';
+  static const String imagesLogoGov = 'assets/images/logo_gov.png';
 }

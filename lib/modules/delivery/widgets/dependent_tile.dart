@@ -39,7 +39,7 @@ class DependentTile extends StatelessWidget {
           child: Row(
             children: [
               Icon(
-                Icons.child_care,
+                Icons.person,
                 color: context.colors.primary,
                 size: 60.r,
               ),

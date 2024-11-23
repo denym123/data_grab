@@ -36,30 +36,32 @@ class DeliveryList extends StatelessWidget {
                   itemCount: controller.deliveries.length,
                 )
               : SingleChildScrollView(
-                  physics: const BouncingScrollPhysics(),
+                  physics: const AlwaysScrollableScrollPhysics(),
                   child: Padding(
-                    padding: EdgeInsets.fromLTRB(16.w, 60.h, 16.w, 0),
+                    padding: EdgeInsets.fromLTRB(16.w, 150.h, 16.w, 0),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       mainAxisSize: MainAxisSize.max,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Image.asset(
-                          Assets.imagesNotFound,
+                          Assets.imagesLogoBrincarESonhar,
                           fit: BoxFit.contain,
                         ),
+                        SizedBox(height: 16.h),
                         Text(
-                          "Nenhuma entrega",
-                          style: context.textStyles.semiBold16,
+                          "Nenhuma entrega registrada!",
+                          style:
+                              context.textStyles.bold.copyWith(fontSize: 20.sp),
+                          textAlign: TextAlign.center,
                         ),
-                        DefaultButton(
-                          icon: Icons.refresh,
-                          onPressed: () {
-                            controller.fetchDeliveries();
-                          },
-                          label: "Tentar novamente",
-                          backgroundColor: context.colors.primary,
-                        )
+                        SizedBox(height: 16.h),
+                        Text(
+                          "Clique no botão acima para criar uma nova entrega!",
+                          style: context.textStyles.medium
+                              .copyWith(fontSize: 16.sp),
+                          textAlign: TextAlign.center,
+                        ),
                       ],
                     ),
                   ),

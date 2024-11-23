@@ -55,6 +55,7 @@ class Dependent extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Image.asset(Assets.imagesNotFound),
+                      SizedBox(height: 16.h),
                       Text(
                         "Não há dependentes cadastrados",
                         style: context.textStyles.bold16,

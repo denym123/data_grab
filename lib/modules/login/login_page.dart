@@ -28,9 +28,12 @@ class LoginPageState extends PageLifeCycleState<LoginController, LoginPage>
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 SizedBox(height: 150.h),
+                Image.asset(Assets.imagesLogoGov, fit: BoxFit.contain),
+                SizedBox(height: 24.h),
                 Text(
                   "Insira seu nome completo e CPF para registrar seus nomes nas entregas.",
                   style: context.textStyles.bold16,
+                  textAlign: TextAlign.center,
                 ),
                 SizedBox(height: 44.h),
                 DefaultInputField(

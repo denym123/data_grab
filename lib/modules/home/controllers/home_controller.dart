@@ -4,6 +4,7 @@ import 'package:data_grab/modules/home/home.dart';
 import 'package:data_grab/modules/home/models/person_model.dart';
 import 'package:excel/excel.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:intl/intl.dart';
 import 'package:mobx/mobx.dart';
 import 'package:open_filex/open_filex.dart';
 import 'package:path_provider/path_provider.dart';
@@ -37,7 +38,7 @@ abstract class HomeControllerBase with Store, ControllerLifeCycle {
     var deliveries = await _homeRepository.getCompleteDeliveries();
 
     var excel = Excel.createExcel();
-    var sheet = excel['Deliveries'];
+    var sheet = excel['Entregas'];
     excel.delete("Sheet1");
 
     // Estilização para cabeçalho
@@ -60,7 +61,9 @@ abstract class HomeControllerBase with Store, ControllerLifeCycle {
       "cep",
       "cidade",
       "bairro",
-      "rua"
+      "rua",
+      "nome do entrevistador",
+      "documento do entrevistador"
     ];
 
     for (var col = 0; col < headers.length; col++) {
@@ -119,19 +122,28 @@ abstract class HomeControllerBase with Store, ControllerLifeCycle {
             .value = TextCellValue(child.city ?? 'N/I');
         sheet
             .cell(CellIndex.indexByColumnRow(
-            columnIndex: 10, rowIndex: currentRow))
+                columnIndex: 10, rowIndex: currentRow))
             .value = TextCellValue(child.neighborhood ?? 'N/I');
         sheet
             .cell(CellIndex.indexByColumnRow(
-            columnIndex: 11, rowIndex: currentRow))
+                columnIndex: 11, rowIndex: currentRow))
             .value = TextCellValue(child.street ?? 'N/I');
+        sheet
+            .cell(CellIndex.indexByColumnRow(
+                columnIndex: 12, rowIndex: currentRow))
+            .value = TextCellValue(delivery.interviewerName ?? 'N/I');
+        sheet
+            .cell(CellIndex.indexByColumnRow(
+                columnIndex: 13, rowIndex: currentRow))
+            .value = TextCellValue(delivery.interviewerDocument ?? 'N/I');
         currentRow++;
       }
     }
 
     // Salva o arquivo temporário
     Directory tempDir = await getTemporaryDirectory();
-    String filePath = '${tempDir.path}/${Modular.get<UserStore>().userModel?.name}${DateTime.now().toIso8601String()}.xlsx';
+    String filePath =
+        '${tempDir.path}/${Modular.get<UserStore>().userModel?.name}${DateFormat("yyyy-MM-dd_HH-mm-ss").format(DateTime.now())}.xlsx';
     File(filePath).writeAsBytesSync(excel.save()!);
 
     await OpenFilex.open(filePath);
