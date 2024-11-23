@@ -59,11 +59,7 @@ class DefaultSelect extends StatelessWidget {
             );
           },
           filterFn: (item, filter) {
-            return item
-                .toString()
-                .removeDiacritics()
-                .toLowerCase()
-                .contains(filter.toString().removeDiacritics().toLowerCase());
+            return item?.name.toLowerCase().contains(filter.toLowerCase()) ?? false;
           },
           dropdownDecoratorProps: DropDownDecoratorProps(
             dropdownSearchDecoration:
