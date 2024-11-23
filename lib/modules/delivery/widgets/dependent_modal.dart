@@ -46,7 +46,7 @@ class _DependentModalState extends State<DependentModal> with FormValidator {
                     ),
                     SizedBox(height: 16.h),
                     DefaultInputField(
-                      label: "Documento",
+                      label: "CPF",
                       keyboardType: TextInputType.number,
                       controller: widget.controller.dependentDocumentController,
                       validator: isDocumentValid,

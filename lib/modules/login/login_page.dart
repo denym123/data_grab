@@ -31,7 +31,7 @@ class LoginPageState extends PageLifeCycleState<LoginController, LoginPage>
                 Image.asset(Assets.imagesLogoGov, fit: BoxFit.contain),
                 SizedBox(height: 24.h),
                 Text(
-                  "Insira seu nome completo e CPF para registrar seus nomes nas entregas.",
+                  "Insira seu nome completo e CPF para registrar seu nome nas entregas.",
                   style: context.textStyles.bold16,
                   textAlign: TextAlign.center,
                 ),
