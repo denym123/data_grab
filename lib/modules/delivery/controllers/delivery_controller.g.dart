@@ -25,6 +25,70 @@ mixin _$DeliveryController on DeliveryControllerBase, Store {
     });
   }
 
+  late final _$citiesAtom =
+      Atom(name: 'DeliveryControllerBase.cities', context: context);
+
+  @override
+  ObservableList<OptionModel> get cities {
+    _$citiesAtom.reportRead();
+    return super.cities;
+  }
+
+  @override
+  set cities(ObservableList<OptionModel> value) {
+    _$citiesAtom.reportWrite(value, super.cities, () {
+      super.cities = value;
+    });
+  }
+
+  late final _$nationalitiesAtom =
+      Atom(name: 'DeliveryControllerBase.nationalities', context: context);
+
+  @override
+  ObservableList<OptionModel> get nationalities {
+    _$nationalitiesAtom.reportRead();
+    return super.nationalities;
+  }
+
+  @override
+  set nationalities(ObservableList<OptionModel> value) {
+    _$nationalitiesAtom.reportWrite(value, super.nationalities, () {
+      super.nationalities = value;
+    });
+  }
+
+  late final _$cityAtom =
+      Atom(name: 'DeliveryControllerBase.city', context: context);
+
+  @override
+  OptionModel? get city {
+    _$cityAtom.reportRead();
+    return super.city;
+  }
+
+  @override
+  set city(OptionModel? value) {
+    _$cityAtom.reportWrite(value, super.city, () {
+      super.city = value;
+    });
+  }
+
+  late final _$nationalityAtom =
+      Atom(name: 'DeliveryControllerBase.nationality', context: context);
+
+  @override
+  OptionModel? get nationality {
+    _$nationalityAtom.reportRead();
+    return super.nationality;
+  }
+
+  @override
+  set nationality(OptionModel? value) {
+    _$nationalityAtom.reportWrite(value, super.nationality, () {
+      super.nationality = value;
+    });
+  }
+
   late final _$dependentsAtom =
       Atom(name: 'DeliveryControllerBase.dependents', context: context);
 
@@ -206,23 +270,6 @@ mixin _$DeliveryController on DeliveryControllerBase, Store {
     });
   }
 
-  late final _$nationalityControllerAtom = Atom(
-      name: 'DeliveryControllerBase.nationalityController', context: context);
-
-  @override
-  TextEditingController get nationalityController {
-    _$nationalityControllerAtom.reportRead();
-    return super.nationalityController;
-  }
-
-  @override
-  set nationalityController(TextEditingController value) {
-    _$nationalityControllerAtom.reportWrite(value, super.nationalityController,
-        () {
-      super.nationalityController = value;
-    });
-  }
-
   late final _$numberControllerAtom =
       Atom(name: 'DeliveryControllerBase.numberController', context: context);
 
@@ -381,6 +428,10 @@ mixin _$DeliveryController on DeliveryControllerBase, Store {
   String toString() {
     return '''
 races: ${races},
+cities: ${cities},
+nationalities: ${nationalities},
+city: ${city},
+nationality: ${nationality},
 dependents: ${dependents},
 dependentNameController: ${dependentNameController},
 dependentDocumentController: ${dependentDocumentController},
@@ -392,7 +443,6 @@ sex: ${sex},
 nameController: ${nameController},
 documentController: ${documentController},
 birthDayController: ${birthDayController},
-nationalityController: ${nationalityController},
 numberController: ${numberController},
 contactController: ${contactController},
 cepController: ${cepController},

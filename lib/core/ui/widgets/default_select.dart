@@ -101,7 +101,7 @@ class DefaultSelect extends StatelessWidget {
               );
             },
           ),
-          itemAsString: (item) => item?.name ?? "",
+          itemAsString: (item) => item?.name.capitalize() ?? "",
           selectedItem: value,
           items: options ?? [],
           onChanged: (val){

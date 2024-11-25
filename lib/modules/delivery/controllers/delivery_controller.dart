@@ -39,6 +39,44 @@ abstract class DeliveryControllerBase with Store, ControllerLifeCycle {
   ObservableList<OptionModel> races = ObservableList<OptionModel>();
 
   @observable
+  ObservableList<OptionModel> cities = ObservableList<OptionModel>.of(
+    [
+      OptionModel(id: 0, name: "Boa Vista"),
+      OptionModel(id: 1, name: "Alto Alegre"),
+      OptionModel(id: 2, name: "Amajari"),
+      OptionModel(id: 3, name: "Bonfim"),
+      OptionModel(id: 4, name: "Cantá"),
+      OptionModel(id: 5, name: "Caracaraí"),
+      OptionModel(id: 6, name: "Caroebe"),
+      OptionModel(id: 7, name: "Iracema"),
+      OptionModel(id: 8, name: "Mucajaí"),
+      OptionModel(id: 9, name: "Normandia"),
+      OptionModel(id: 10, name: "Pacaraima"),
+      OptionModel(id: 11, name: "Rorainópolis"),
+      OptionModel(id: 12, name: "São João da Baliza"),
+      OptionModel(id: 13, name: "São Luiz"),
+      OptionModel(id: 14, name: "Uiramutã"),
+    ],
+  );
+
+  @observable
+  ObservableList<OptionModel> nationalities = ObservableList<OptionModel>.of(
+    [
+      OptionModel(id: 0, name: "Brasileiro"),
+      OptionModel(id: 1, name: "Venezuelano"),
+      OptionModel(id: 2, name: "Haitiano"),
+      OptionModel(id: 3, name: "Colombiano"),
+      OptionModel(id: 4, name: "Outros"),
+    ],
+  );
+
+  @observable
+  OptionModel? city;
+
+  @observable
+  OptionModel? nationality;
+
+  @observable
   ObservableList<DependentModel> dependents = ObservableList<DependentModel>();
 
   @observable
@@ -70,9 +108,6 @@ abstract class DeliveryControllerBase with Store, ControllerLifeCycle {
 
   @observable
   TextEditingController birthDayController = TextEditingController();
-
-  @observable
-  TextEditingController nationalityController = TextEditingController();
 
   @observable
   TextEditingController numberController = TextEditingController();
@@ -119,18 +154,20 @@ abstract class DeliveryControllerBase with Store, ControllerLifeCycle {
       responsible: ResponsibleModel(
         sex: sex?.name ?? '',
         birthday: birthDayController.text,
-        city: cityController.text,
+        city: city?.name ?? '',
         community: community?.name ?? '',
         document: documentController.text,
         name: nameController.text,
         neighbourhood: neighborhoodController.text,
-        nationality: nationalityController.text ?? '',
+        nationality: nationality?.name ?? '',
         street: addressController.text,
         zip: cepController.text,
+        number: numberController.text,
         familyId: null,
       ),
     );
     var interviewer = {
+      "created_at": DateTime.now().toIso8601String(),
       "interviewer_name": _userStore.userModel!.name,
       "interviewer_document": _userStore.userModel!.document,
     };
@@ -164,12 +201,11 @@ abstract class DeliveryControllerBase with Store, ControllerLifeCycle {
     races.addAll(list);
   }
 
-  void clearDependentFields(){
+  void clearDependentFields() {
     dependentNameController.clear();
     dependentDocumentController.clear();
     dependentBirthDayController.clear();
     dependentSex = null;
     dependentCommunity = null;
   }
-
 }

@@ -21,8 +21,7 @@ LEFT JOIN
     person p_child ON f.id = p_child.family_id AND p_child.is_parent = 0
 GROUP BY 
     f.id, p_parent.name, p_parent.document;
-            '''
-    );
+            ''');
     return query
         .toList()
         .map(
@@ -33,10 +32,10 @@ GROUP BY
 
   Future<List<DeliveryExportModel>> getCompleteDeliveries() async {
     var conn = await SqliteConnectionFactory().openConnection();
-    var query = await conn.rawQuery(
-        '''
+    var query = await conn.rawQuery('''
 SELECT 
     f.id AS family_id,
+    f.created_at,
     f.interviewer_name,
     f.interviewer_document,
     '[' || 
@@ -53,6 +52,7 @@ SELECT
         ',"city":"' || IFNULL(p.city, '') || '"' ||
         ',"street":"' || IFNULL(p.street, '') || '"' ||
         ',"neighborhood":"' || IFNULL(p.neighborhood, '') || '"' ||
+        ',"number":"' || IFNULL(p.number, '') || '"' ||
         ',"family_id":' || IFNULL(p.family_id, 'null') || '}'
     ), '') || 
     ']' AS family
@@ -62,8 +62,7 @@ LEFT JOIN
     person p ON f.id = p.family_id
 GROUP BY 
     f.id, f.interviewer_name, f.interviewer_document;
-     '''
-    );
+     ''');
     return query
         .toList()
         .map(
@@ -71,5 +70,4 @@ GROUP BY
         )
         .toList();
   }
-
 }

@@ -1,5 +1,6 @@
 import 'package:data_grab/core/core.dart';
 import 'package:data_grab/core/ui/widgets/default_input_field.dart';
+import 'package:data_grab/core/ui/widgets/default_select.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
@@ -44,10 +45,18 @@ class _ResponsibleAddressState extends State<ResponsibleAddress>
                   keyboardType: TextInputType.number,
                 ),
                 SizedBox(height: 16.h),
-                DefaultInputField(
+                DefaultSelect(
+                  value: widget.controller.city,
                   label: "Cidade *",
-                  controller: widget.controller.cityController,
-                  validator: isNotEmpty,
+                  onChanged: (value) {
+                    widget.controller.city = value;
+                  },
+                  validator: (p0) {
+                    if (p0 == null) {
+                      return "Selecione a cidade";
+                    }
+                    return null;
+                  }, options: widget.controller.cities,
                 ),
                 SizedBox(height: 16.h),
                 DefaultInputField(

@@ -27,6 +27,7 @@ class MigrationV1 implements Migration {
 
     batch.execute('''
       CREATE table family (
+        created_at TEXT,
         id INTEGER PRIMARY KEY,
         interviewer_name TEXT,
         interviewer_document TEXT);
@@ -56,6 +57,7 @@ class MigrationV1 implements Migration {
 
     batch.execute('''
       CREATE table family (
+        created_at TEXT,
         id INTEGER PRIMARY KEY,
         interviewer_name TEXT,
         interviewer_document TEXT);

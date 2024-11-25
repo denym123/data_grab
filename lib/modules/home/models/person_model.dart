@@ -11,9 +11,12 @@ class PersonModel {
   String? city;
   String? street;
   String? neighborhood;
+  String? number;
+
   PersonModel({
     this.nationality,
     this.id,
+    this.number,
     this.name,
     this.document,
     this.birthday,
@@ -34,6 +37,7 @@ class PersonModel {
       birthday: json['birthday'],
       community: json['community'],
       nationality: json['nationality'],
+      number: json['number'],
       sex: json['sex'],
       isParent: json['is_parent'],
       zip: json['zip'],

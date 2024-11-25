@@ -24,6 +24,7 @@ class SaveFamilyRequestDto {
       "city": responsible?.city ?? '',
       "street": responsible?.street ?? '',
       "neighborhood": responsible?.neighbourhood ?? '',
+      "number": responsible?.number ?? '',
       "sex": responsible?.sex ?? '',
       "family_id": familyId,
     });

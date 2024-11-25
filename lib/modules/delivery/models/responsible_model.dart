@@ -11,6 +11,7 @@ class ResponsibleModel {
   String city;
   String neighbourhood;
   String street;
+  String? number;
 
   ResponsibleModel({
     required this.sex,
@@ -25,5 +26,6 @@ class ResponsibleModel {
     required this.street,
     required this.name,
     required this.document,
+    this.number,
   });
 }
