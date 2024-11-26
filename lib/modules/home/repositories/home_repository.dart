@@ -10,6 +10,7 @@ class HomeRepository {
     var query = await conn.rawQuery('''
 SELECT 
     f.id AS family_id,
+    f.created_at,
     p_parent.name AS responsible_name,
     p_parent.document AS responsible_document,
     '[' || GROUP_CONCAT('"' || p_child.name || '"') || ']' AS children

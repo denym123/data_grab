@@ -50,7 +50,7 @@ class DeliveryList extends StatelessWidget {
                         ),
                         SizedBox(height: 16.h),
                         Text(
-                          "Nenhuma entrega registrada!",
+                          "Nenhuma entrega registrada hoje!",
                           style:
                               context.textStyles.bold.copyWith(fontSize: 20.sp),
                           textAlign: TextAlign.center,

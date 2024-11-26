@@ -50,7 +50,7 @@ abstract class HomeControllerBase with Store, ControllerLifeCycle {
 
     // Adiciona o cabeçalho
     List<String> headers = [
-      "familia id",
+      "cpf titular",
       "nome",
       "documento",
       "data de nascimento",
@@ -84,7 +84,9 @@ abstract class HomeControllerBase with Store, ControllerLifeCycle {
         sheet
             .cell(CellIndex.indexByColumnRow(
                 columnIndex: 0, rowIndex: currentRow))
-            .value = TextCellValue(delivery.familyId.toString());
+            .value = TextCellValue(delivery.children.firstWhere((element) {
+              return element.isParent == 1;
+            },).document ?? 'N/I');
         sheet
             .cell(CellIndex.indexByColumnRow(
                 columnIndex: 1, rowIndex: currentRow))
@@ -177,7 +179,7 @@ abstract class HomeControllerBase with Store, ControllerLifeCycle {
 
     // Adiciona o cabeçalho
     List<String> headers = [
-      "familia id",
+      "cpf titular",
       "nome",
       "documento",
       "data de nascimento",
@@ -218,8 +220,10 @@ abstract class HomeControllerBase with Store, ControllerLifeCycle {
       for (PersonModel child in delivery.children) {
         sheet
             .cell(CellIndex.indexByColumnRow(
-                columnIndex: 0, rowIndex: currentRow))
-            .value = TextCellValue(delivery.familyId.toString());
+            columnIndex: 0, rowIndex: currentRow))
+            .value = TextCellValue(delivery.children.firstWhere((element) {
+          return element.isParent == 1;
+        },).document ?? 'N/I');
         sheet
             .cell(CellIndex.indexByColumnRow(
                 columnIndex: 1, rowIndex: currentRow))
@@ -299,7 +303,12 @@ abstract class HomeControllerBase with Store, ControllerLifeCycle {
     isLoading = true;
     deliveries.clear();
     await _homeRepository.fetchDeliveries().then((value) {
-      deliveries.addAll(value);
+      List<Delivery>filteredList = value.where((element) {
+        var day = DateTime.now().day;
+        var date = element.createdAt;
+        return date?.day == DateTime.now().day;
+      }).toList();
+      deliveries.addAll(filteredList);
     });
     isLoading = false;
   }
