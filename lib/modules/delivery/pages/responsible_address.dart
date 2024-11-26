@@ -41,7 +41,6 @@ class _ResponsibleAddressState extends State<ResponsibleAddress>
                   label: "CEP",
                   controller: widget.controller.cepController,
                   masks: ["99999-999"],
-                  validator: isNotEmpty,
                   keyboardType: TextInputType.number,
                 ),
                 SizedBox(height: 16.h),
@@ -56,7 +55,8 @@ class _ResponsibleAddressState extends State<ResponsibleAddress>
                       return "Selecione a cidade";
                     }
                     return null;
-                  }, options: widget.controller.cities,
+                  },
+                  options: widget.controller.cities,
                 ),
                 SizedBox(height: 16.h),
                 DefaultInputField(
@@ -79,12 +79,14 @@ class _ResponsibleAddressState extends State<ResponsibleAddress>
                 Row(
                   children: [
                     Expanded(
-                      child: HollowButton(label: "Anterior", onPressed: () {
-                        widget.controller.pageController.previousPage(
-                          duration: const Duration(milliseconds: 100),
-                          curve: Curves.bounceIn,
-                        );
-                      }),
+                      child: HollowButton(
+                          label: "Anterior",
+                          onPressed: () {
+                            widget.controller.pageController.previousPage(
+                              duration: const Duration(milliseconds: 100),
+                              curve: Curves.bounceIn,
+                            );
+                          }),
                     ),
                     SizedBox(width: 24.h),
                     Expanded(
