@@ -41,7 +41,6 @@ class _ResponsibleAddressState extends State<ResponsibleAddress>
                   label: "CEP",
                   controller: widget.controller.cepController,
                   masks: ["99999-999"],
-                  validator: isNotEmpty,
                   keyboardType: TextInputType.number,
                 ),
                 SizedBox(height: 16.h),
