@@ -5,9 +5,8 @@ import '../home.dart';
 class HomeRepository {
   Future<List<Delivery>> fetchDeliveries() async {
     var conn = await SqliteConnectionFactory().openConnection();
-    var query = await conn.rawQuery('''
-SELECT name, document, created_at, person_number from responsible
-            ''');
+    var query = await conn.query("responsible",
+        columns: ['name', 'document', 'created_at', 'person_number']);
     return query
         .toList()
         .map(
@@ -19,7 +18,7 @@ SELECT name, document, created_at, person_number from responsible
   Future<List<Delivery>> getCompleteDeliveries() async {
     var conn = await SqliteConnectionFactory().openConnection();
 
-    var result = await conn.query("SELECT * FROM family");
+    var result = await conn.query("responsible");
     return result.map((e) => Delivery.fromJson(e)).toList();
   }
 

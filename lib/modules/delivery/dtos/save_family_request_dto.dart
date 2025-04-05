@@ -9,20 +9,21 @@ class SaveFamilyRequestDto {
 
   Map<String, dynamic> toFishDeliveryJson() {
     return {
-      "responsible": {
-        "name": responsible?.name ?? '',
-        "person_number": responsible?.personNumber ?? '',
-        "document": responsible?.document ?? '',
-        "birthday": responsible?.birthday ?? '',
-        "nationality": responsible?.nationality ?? '',
-        "community": responsible?.community ?? '',
-        "zip": responsible?.zip ?? '',
-        "city": responsible?.city ?? '',
-        "street": responsible?.street ?? '',
-        "neighborhood": responsible?.neighbourhood ?? '',
-        "number": responsible?.number ?? '',
-        "sex": responsible?.sex ?? '',
-      }
+      "name": responsible?.name ?? '',
+      "person_number": responsible?.personNumber ?? '',
+      "document": responsible?.document ?? '',
+      "birthday": responsible?.birthday ?? '',
+      "interviewer_name": responsible?.interviewerName,
+      "interviewer_document": responsible?.interviewerDocument,
+      "nationality": responsible?.nationality ?? '',
+      "community": responsible?.community ?? '',
+      "zip": responsible?.zip ?? '',
+      "created_at": DateTime.now().toIso8601String(),
+      "city": responsible?.city ?? '',
+      "street": responsible?.street ?? '',
+      "neighborhood": responsible?.neighbourhood ?? '',
+      "number": responsible?.number ?? '',
+      "sex": responsible?.sex ?? '',
     };
   }
 

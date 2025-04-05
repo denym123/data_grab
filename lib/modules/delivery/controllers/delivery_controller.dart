@@ -127,6 +127,8 @@ abstract class DeliveryControllerBase with Store, ControllerLifeCycle {
   Future<void> saveFamily() async {
     SaveFamilyRequestDto saveFamilyRequestDto = SaveFamilyRequestDto(
       responsible: ResponsibleModel(
+        interviewerName: _userStore.userModel!.name,
+        interviewerDocument: _userStore.userModel!.document,
         personNumber: personNumberController.text,
         sex: sex?.name ?? '',
         birthday: birthDayController.text,
@@ -139,14 +141,9 @@ abstract class DeliveryControllerBase with Store, ControllerLifeCycle {
         street: addressController.text,
         zip: cepController.text,
         number: numberController.text,
-        familyId: null,
       ),
     );
-    var interviewer = {
-      "created_at": DateTime.now().toIso8601String(),
-      "interviewer_name": _userStore.userModel!.name,
-      "interviewer_document": _userStore.userModel!.document,
-    };
+
     await _deliveryRepository
         .saveOnlyResponsible(saveFamilyRequestDto)
         .then((_) {

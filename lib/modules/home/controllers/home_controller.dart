@@ -1,7 +1,14 @@
+import 'dart:io';
+
 import 'package:data_grab/modules/home/home.dart';
+import 'package:excel/excel.dart';
+import 'package:intl/intl.dart';
 import 'package:mobx/mobx.dart';
+import 'package:open_filex/open_filex.dart';
+import 'package:path_provider/path_provider.dart';
 
 import '../../../core/core.dart';
+import '../../delivery/models/responsible_model.dart';
 
 part 'home_controller.g.dart';
 
@@ -23,271 +30,89 @@ abstract class HomeControllerBase with Store, ControllerLifeCycle {
   @observable
   bool isLoading = false;
 
-  // Future<void> exportAllDeliveryDataToExcel() async {
-  //   // Criação do arquivo Excel
-//
-  //   var deliveries = await _homeRepository.getCompleteDeliveries();
-//
-  //   var excel = Excel.createExcel();
-  //   var sheet = excel['Entregas'];
-  //   excel.delete("Sheet1");
-//
-  //   // Estilização para cabeçalho
-  //   CellStyle headerStyle = CellStyle(
-  //     backgroundColorHex: ExcelColor.white,
-  //     bold: true,
-  //     fontFamily: getFontFamily(FontFamily.Calibri),
-  //   );
-//
-  //   // Adiciona o cabeçalho
-  //   List<String> headers = [
-  //     "cpf titular",
-  //     "nome",
-  //     "documento",
-  //     "data de nascimento",
-  //     "sexo",
-  //     "nacionalidade",
-  //     "parentesco",
-  //     "comunidade",
-  //     "cep",
-  //     "cidade",
-  //     "bairro",
-  //     "rua",
-  //     "numero",
-  //     "nome do entrevistador",
-  //     "documento do entrevistador",
-  //     "data de criação"
-  //   ];
-//
-  //   for (var col = 0; col < headers.length; col++) {
-  //     var cell =
-  //         sheet.cell(CellIndex.indexByColumnRow(columnIndex: col, rowIndex: 0));
-  //     cell.value = TextCellValue(headers[col]);
-  //     cell.cellStyle = headerStyle;
-  //   }
-//
-  //   // Adiciona os dados
-  //   int currentRow = 1;
-//
-  //   // Itera sobre as entregas e preenche os dados
-  //   for (DeliveryExportModel delivery in deliveries) {
-  //     for (PersonModel child in delivery.children) {
-  //       sheet
-  //           .cell(CellIndex.indexByColumnRow(
-  //               columnIndex: 0, rowIndex: currentRow))
-  //           .value = TextCellValue(delivery.children.firstWhere((element) {
-  //             return element.isParent == 1;
-  //           },).document ?? 'N/I');
-  //       sheet
-  //           .cell(CellIndex.indexByColumnRow(
-  //               columnIndex: 1, rowIndex: currentRow))
-  //           .value = TextCellValue(child.name ?? 'N/I');
-  //       sheet
-  //           .cell(CellIndex.indexByColumnRow(
-  //               columnIndex: 2, rowIndex: currentRow))
-  //           .value = TextCellValue(child.document ?? 'N/I');
-  //       sheet
-  //           .cell(CellIndex.indexByColumnRow(
-  //               columnIndex: 3, rowIndex: currentRow))
-  //           .value = TextCellValue(child.birthday ?? 'N/I');
-  //       sheet
-  //           .cell(CellIndex.indexByColumnRow(
-  //               columnIndex: 4, rowIndex: currentRow))
-  //           .value = TextCellValue(child.sex ?? 'N/I');
-  //       sheet
-  //           .cell(CellIndex.indexByColumnRow(
-  //               columnIndex: 5, rowIndex: currentRow))
-  //           .value = TextCellValue(child.nationality ?? 'N/I');
-  //       sheet
-  //               .cell(CellIndex.indexByColumnRow(
-  //                   columnIndex: 6, rowIndex: currentRow))
-  //               .value =
-  //           TextCellValue(child.isParent == 1 ? "Responsável" : "Dependente");
-  //       sheet
-  //           .cell(CellIndex.indexByColumnRow(
-  //               columnIndex: 7, rowIndex: currentRow))
-  //           .value = TextCellValue(child.community ?? 'N/I');
-  //       sheet
-  //           .cell(CellIndex.indexByColumnRow(
-  //               columnIndex: 8, rowIndex: currentRow))
-  //           .value = TextCellValue(child.zip ?? 'N/I');
-  //       sheet
-  //           .cell(CellIndex.indexByColumnRow(
-  //               columnIndex: 9, rowIndex: currentRow))
-  //           .value = TextCellValue(child.city ?? 'N/I');
-  //       sheet
-  //           .cell(CellIndex.indexByColumnRow(
-  //               columnIndex: 10, rowIndex: currentRow))
-  //           .value = TextCellValue(child.neighborhood ?? 'N/I');
-  //       sheet
-  //           .cell(CellIndex.indexByColumnRow(
-  //               columnIndex: 11, rowIndex: currentRow))
-  //           .value = TextCellValue(child.street ?? 'N/I');
-  //       sheet
-  //           .cell(CellIndex.indexByColumnRow(
-  //               columnIndex: 12, rowIndex: currentRow))
-  //           .value = TextCellValue(child.number ?? 'N/I');
-  //       sheet
-  //           .cell(CellIndex.indexByColumnRow(
-  //               columnIndex: 13, rowIndex: currentRow))
-  //           .value = TextCellValue(delivery.interviewerName ?? 'N/I');
-  //       sheet
-  //           .cell(CellIndex.indexByColumnRow(
-  //               columnIndex: 14, rowIndex: currentRow))
-  //           .value = TextCellValue(delivery.interviewerDocument ?? 'N/I');
-  //       sheet
-  //           .cell(CellIndex.indexByColumnRow(
-  //               columnIndex: 15, rowIndex: currentRow))
-  //           .value = TextCellValue(delivery.createdAt ?? 'N/I');
-  //       currentRow++;
-  //     }
-  //   }
-//
-  //   // Salva o arquivo temporário
-  //   Directory tempDir = await getTemporaryDirectory();
-  //   String filePath =
-  //       '${tempDir.path}/${Modular.get<UserStore>().userModel?.name}${DateFormat("yyyy-MM-dd_HH-mm-ss").format(DateTime.now())}.xlsx';
-  //   File(filePath).writeAsBytesSync(excel.save()!);
-//
-  //   await OpenFilex.open(filePath);
-  // }
-//
-  // Future<void> exportFilteredDeliveryDataToExcel() async {
-  //   // Criação do arquivo Excel
-//
-  //   var deliveries = await _homeRepository.getCompleteDeliveries();
-//
-  //   var excel = Excel.createExcel();
-  //   var sheet = excel['Entregas'];
-  //   excel.delete("Sheet1");
-//
-  //   // Estilização para cabeçalho
-  //   CellStyle headerStyle = CellStyle(
-  //     backgroundColorHex: ExcelColor.white,
-  //     bold: true,
-  //     fontFamily: getFontFamily(FontFamily.Calibri),
-  //   );
-//
-  //   // Adiciona o cabeçalho
-  //   List<String> headers = [
-  //     "cpf titular",
-  //     "nome",
-  //     "documento",
-  //     "data de nascimento",
-  //     "sexo",
-  //     "nacionalidade",
-  //     "parentesco",
-  //     "comunidade",
-  //     "cep",
-  //     "cidade",
-  //     "bairro",
-  //     "rua",
-  //     "numero",
-  //     "nome do entrevistador",
-  //     "documento do entrevistador",
-  //     "data de criação"
-  //   ];
-//
-  //   for (var col = 0; col < headers.length; col++) {
-  //     var cell =
-  //         sheet.cell(CellIndex.indexByColumnRow(columnIndex: col, rowIndex: 0));
-  //     cell.value = TextCellValue(headers[col]);
-  //     cell.cellStyle = headerStyle;
-  //   }
-//
-  //   // Adiciona os dados
-  //   int currentRow = 1;
-//
-  //   var filteredDeliveries = deliveries.where(
-  //     (element) {
-  //       var day = DateTime.now().day;
-  //       var date = DateTime.parse(element.createdAt!);
-  //       return date.day == DateTime.now().day;
-  //     },
-  //   ).toList();
-//
-  //   // Itera sobre as entregas e preenche os dados
-  //   for (DeliveryExportModel delivery in filteredDeliveries) {
-  //     for (PersonModel child in delivery.children) {
-  //       sheet
-  //           .cell(CellIndex.indexByColumnRow(
-  //           columnIndex: 0, rowIndex: currentRow))
-  //           .value = TextCellValue(delivery.children.firstWhere((element) {
-  //         return element.isParent == 1;
-  //       },).document ?? 'N/I');
-  //       sheet
-  //           .cell(CellIndex.indexByColumnRow(
-  //               columnIndex: 1, rowIndex: currentRow))
-  //           .value = TextCellValue(child.name ?? 'N/I');
-  //       sheet
-  //           .cell(CellIndex.indexByColumnRow(
-  //               columnIndex: 2, rowIndex: currentRow))
-  //           .value = TextCellValue(child.document ?? 'N/I');
-  //       sheet
-  //           .cell(CellIndex.indexByColumnRow(
-  //               columnIndex: 3, rowIndex: currentRow))
-  //           .value = TextCellValue(child.birthday ?? 'N/I');
-  //       sheet
-  //           .cell(CellIndex.indexByColumnRow(
-  //               columnIndex: 4, rowIndex: currentRow))
-  //           .value = TextCellValue(child.sex ?? 'N/I');
-  //       sheet
-  //           .cell(CellIndex.indexByColumnRow(
-  //               columnIndex: 5, rowIndex: currentRow))
-  //           .value = TextCellValue(child.nationality ?? 'N/I');
-  //       sheet
-  //               .cell(CellIndex.indexByColumnRow(
-  //                   columnIndex: 6, rowIndex: currentRow))
-  //               .value =
-  //           TextCellValue(child.isParent == 1 ? "Responsável" : "Dependente");
-  //       sheet
-  //           .cell(CellIndex.indexByColumnRow(
-  //               columnIndex: 7, rowIndex: currentRow))
-  //           .value = TextCellValue(child.community ?? 'N/I');
-  //       sheet
-  //           .cell(CellIndex.indexByColumnRow(
-  //               columnIndex: 8, rowIndex: currentRow))
-  //           .value = TextCellValue(child.zip ?? 'N/I');
-  //       sheet
-  //           .cell(CellIndex.indexByColumnRow(
-  //               columnIndex: 9, rowIndex: currentRow))
-  //           .value = TextCellValue(child.city ?? 'N/I');
-  //       sheet
-  //           .cell(CellIndex.indexByColumnRow(
-  //               columnIndex: 10, rowIndex: currentRow))
-  //           .value = TextCellValue(child.neighborhood ?? 'N/I');
-  //       sheet
-  //           .cell(CellIndex.indexByColumnRow(
-  //               columnIndex: 11, rowIndex: currentRow))
-  //           .value = TextCellValue(child.street ?? 'N/I');
-  //       sheet
-  //           .cell(CellIndex.indexByColumnRow(
-  //               columnIndex: 12, rowIndex: currentRow))
-  //           .value = TextCellValue(child.number ?? 'N/I');
-  //       sheet
-  //           .cell(CellIndex.indexByColumnRow(
-  //               columnIndex: 13, rowIndex: currentRow))
-  //           .value = TextCellValue(delivery.interviewerName ?? 'N/I');
-  //       sheet
-  //           .cell(CellIndex.indexByColumnRow(
-  //               columnIndex: 14, rowIndex: currentRow))
-  //           .value = TextCellValue(delivery.interviewerDocument ?? 'N/I');
-  //       sheet
-  //           .cell(CellIndex.indexByColumnRow(
-  //               columnIndex: 15, rowIndex: currentRow))
-  //           .value = TextCellValue(delivery.createdAt ?? 'N/I');
-  //       currentRow++;
-  //     }
-  //   }
-//
-  //   // Salva o arquivo temporário
-  //   Directory tempDir = await getTemporaryDirectory();
-  //   String filePath =
-  //       '${tempDir.path}/${Modular.get<UserStore>().userModel?.name}${DateFormat("yyyy-MM-dd_HH-mm-ss").format(DateTime.now())}.xlsx';
-  //   File(filePath).writeAsBytesSync(excel.save()!);
-//
-  //   await OpenFilex.open(filePath);
-  // }
+  Future<void> exportResponsibleToExcel() async {
+    // Recupera os dados da tabela responsible
+    List<ResponsibleModel> responsibles =
+        await _homeRepository.getCompleteDeliveries();
+
+    var excel = Excel.createExcel();
+    var sheet = excel['Responsáveis'];
+    excel.delete("Sheet1");
+
+    // Estilo do cabeçalho
+    CellStyle headerStyle = CellStyle(
+      backgroundColorHex: ExcelColor.white,
+      bold: true,
+      fontFamily: getFontFamily(FontFamily.Calibri),
+    );
+
+    // Cabeçalhos
+    List<String> headers = [
+      "ID",
+      "Número de pessoas na residência", // <--- Alterado aqui
+      "Nome do entrevistador",
+      "Documento do entrevistador",
+      "Nome",
+      "Documento",
+      "Data de nascimento",
+      "Criado em",
+      "Sexo",
+      "Nacionalidade",
+      "Comunidade",
+      "CEP",
+      "Cidade",
+      "Bairro",
+      "Rua",
+      "Número"
+    ];
+
+    for (var col = 0; col < headers.length; col++) {
+      var cell =
+          sheet.cell(CellIndex.indexByColumnRow(columnIndex: col, rowIndex: 0));
+      cell.value = TextCellValue(headers[col]);
+      cell.cellStyle = headerStyle;
+    }
+
+    int currentRow = 1;
+
+    for (var r in responsibles) {
+      List<String?> rowValues = [
+        r.id.toString(),
+        r.personNumber,
+        r.interviewerName,
+        r.interviewerDocument,
+        r.name,
+        r.document,
+        r.birthday,
+        r.createdAt,
+        r.sex,
+        r.nationality,
+        r.community,
+        r.zip,
+        r.city,
+        r.neighbourhood,
+        r.street,
+        r.number
+      ];
+
+      for (var col = 0; col < rowValues.length; col++) {
+        sheet
+            .cell(CellIndex.indexByColumnRow(
+                columnIndex: col, rowIndex: currentRow))
+            .value = TextCellValue(rowValues[col] ?? 'N/I');
+      }
+
+      currentRow++;
+    }
+
+    // Salva o arquivo temporário
+    Directory tempDir = await getTemporaryDirectory();
+    String filePath =
+        '${tempDir.path}/responsaveis_${DateFormat("yyyy-MM-dd_HH-mm-ss").format(DateTime.now())}.xlsx';
+    File(filePath).writeAsBytesSync(excel.save()!);
+
+    await OpenFilex.open(filePath);
+  }
 
   @action
   Future<void> fetchDeliveries() async {

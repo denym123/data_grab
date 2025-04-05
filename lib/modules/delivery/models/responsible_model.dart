@@ -1,7 +1,9 @@
 class ResponsibleModel {
   int? id;
   String? personNumber;
-  int? familyId;
+  String? createdAt;
+  String? interviewerName;
+  String? interviewerDocument;
   String name;
   String document;
   String birthday;
@@ -21,7 +23,9 @@ class ResponsibleModel {
     required this.personNumber,
     required this.nationality,
     required this.birthday,
-    required this.familyId,
+    required this.createdAt,
+    required this.interviewerName,
+    required this.interviewerDocument,
     required this.community,
     required this.zip,
     required this.city,

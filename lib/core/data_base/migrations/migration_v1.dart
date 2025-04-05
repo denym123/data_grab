@@ -8,7 +8,9 @@ class MigrationV1 implements Migration {
     batch.execute('''
       CREATE table responsible (
         id INTEGER PRIMARY KEY,
-        person_number TEXT,
+        person_number TEXT, 
+        interviewer_name TEXT,
+        interviewer_document TEXT,
         name TEXT,
         document TEXT,
         birthday TEXT,
@@ -28,6 +30,8 @@ class MigrationV1 implements Migration {
     batch.execute('''
       CREATE table responsible (
         id INTEGER PRIMARY KEY,
+        interviewer_name TEXT,
+        interviewer_document TEXT,
         person_number TEXT,
         name TEXT,
         document TEXT,

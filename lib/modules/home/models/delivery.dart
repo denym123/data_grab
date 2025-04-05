@@ -12,10 +12,10 @@ class Delivery {
 
   factory Delivery.fromJson(Map<String, dynamic> json) {
     return Delivery(
-      responsibleName: json['responsible_name'],
+      responsibleName: json['name'],
       createdAt: DateTime.parse(json['created_at']),
       personNumber: json['person_number'],
-      responsibleDocument: json['responsible_document'],
+      responsibleDocument: json['document'],
     );
   }
 }
