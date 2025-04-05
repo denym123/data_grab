@@ -1,7 +1,6 @@
 import 'package:data_grab/core/ui/widgets/default_button.dart';
 import 'package:data_grab/modules/home/widgets/delivery_list.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
 
 import '../../core/core.dart';
 import 'home.dart';
@@ -30,6 +29,7 @@ class HomePageState extends PageLifeCycleState<HomeController, HomePage> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 DefaultButton(
+                  foregroundColor: Colors.white,
                   label: "Nova entrega",
                   backgroundColor: context.colors.primary,
                   icon: Icons.add,
@@ -40,7 +40,7 @@ class HomePageState extends PageLifeCycleState<HomeController, HomePage> {
                   backgroundColor: Color(0xff279629),
                   icon: Icons.upload_file_rounded,
                   onPressed: () {
-                    controller.exportFilteredDeliveryDataToExcel();
+                    // controller.exportFilteredDeliveryDataToExcel();
                   },
                 ),
               ],

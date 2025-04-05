@@ -26,11 +26,10 @@ class DeliveryPageState
                 children: [
                   ResponsibleData(controller: controller),
                   ResponsibleAddress(controller: controller),
-                  Dependent(controller: controller),
                 ],
               ),
             ),
           ],
-        ));
+        ),);
   }
 }

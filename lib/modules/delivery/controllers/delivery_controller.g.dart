@@ -105,91 +105,6 @@ mixin _$DeliveryController on DeliveryControllerBase, Store {
     });
   }
 
-  late final _$dependentNameControllerAtom = Atom(
-      name: 'DeliveryControllerBase.dependentNameController', context: context);
-
-  @override
-  TextEditingController get dependentNameController {
-    _$dependentNameControllerAtom.reportRead();
-    return super.dependentNameController;
-  }
-
-  @override
-  set dependentNameController(TextEditingController value) {
-    _$dependentNameControllerAtom
-        .reportWrite(value, super.dependentNameController, () {
-      super.dependentNameController = value;
-    });
-  }
-
-  late final _$dependentDocumentControllerAtom = Atom(
-      name: 'DeliveryControllerBase.dependentDocumentController',
-      context: context);
-
-  @override
-  TextEditingController get dependentDocumentController {
-    _$dependentDocumentControllerAtom.reportRead();
-    return super.dependentDocumentController;
-  }
-
-  @override
-  set dependentDocumentController(TextEditingController value) {
-    _$dependentDocumentControllerAtom
-        .reportWrite(value, super.dependentDocumentController, () {
-      super.dependentDocumentController = value;
-    });
-  }
-
-  late final _$dependentBirthDayControllerAtom = Atom(
-      name: 'DeliveryControllerBase.dependentBirthDayController',
-      context: context);
-
-  @override
-  TextEditingController get dependentBirthDayController {
-    _$dependentBirthDayControllerAtom.reportRead();
-    return super.dependentBirthDayController;
-  }
-
-  @override
-  set dependentBirthDayController(TextEditingController value) {
-    _$dependentBirthDayControllerAtom
-        .reportWrite(value, super.dependentBirthDayController, () {
-      super.dependentBirthDayController = value;
-    });
-  }
-
-  late final _$dependentSexAtom =
-      Atom(name: 'DeliveryControllerBase.dependentSex', context: context);
-
-  @override
-  OptionModel? get dependentSex {
-    _$dependentSexAtom.reportRead();
-    return super.dependentSex;
-  }
-
-  @override
-  set dependentSex(OptionModel? value) {
-    _$dependentSexAtom.reportWrite(value, super.dependentSex, () {
-      super.dependentSex = value;
-    });
-  }
-
-  late final _$dependentCommunityAtom =
-      Atom(name: 'DeliveryControllerBase.dependentCommunity', context: context);
-
-  @override
-  OptionModel? get dependentCommunity {
-    _$dependentCommunityAtom.reportRead();
-    return super.dependentCommunity;
-  }
-
-  @override
-  set dependentCommunity(OptionModel? value) {
-    _$dependentCommunityAtom.reportWrite(value, super.dependentCommunity, () {
-      super.dependentCommunity = value;
-    });
-  }
-
   late final _$pageControllerAtom =
       Atom(name: 'DeliveryControllerBase.pageController', context: context);
 
@@ -251,6 +166,23 @@ mixin _$DeliveryController on DeliveryControllerBase, Store {
   set documentController(TextEditingController value) {
     _$documentControllerAtom.reportWrite(value, super.documentController, () {
       super.documentController = value;
+    });
+  }
+
+  late final _$personNumberControllerAtom = Atom(
+      name: 'DeliveryControllerBase.personNumberController', context: context);
+
+  @override
+  TextEditingController get personNumberController {
+    _$personNumberControllerAtom.reportRead();
+    return super.personNumberController;
+  }
+
+  @override
+  set personNumberController(TextEditingController value) {
+    _$personNumberControllerAtom
+        .reportWrite(value, super.personNumberController, () {
+      super.personNumberController = value;
     });
   }
 
@@ -414,17 +346,6 @@ mixin _$DeliveryController on DeliveryControllerBase, Store {
   }
 
   @override
-  void addDependent() {
-    final _$actionInfo = _$DeliveryControllerBaseActionController.startAction(
-        name: 'DeliveryControllerBase.addDependent');
-    try {
-      return super.addDependent();
-    } finally {
-      _$DeliveryControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
   String toString() {
     return '''
 races: ${races},
@@ -433,15 +354,11 @@ nationalities: ${nationalities},
 city: ${city},
 nationality: ${nationality},
 dependents: ${dependents},
-dependentNameController: ${dependentNameController},
-dependentDocumentController: ${dependentDocumentController},
-dependentBirthDayController: ${dependentBirthDayController},
-dependentSex: ${dependentSex},
-dependentCommunity: ${dependentCommunity},
 pageController: ${pageController},
 sex: ${sex},
 nameController: ${nameController},
 documentController: ${documentController},
+personNumberController: ${personNumberController},
 birthDayController: ${birthDayController},
 numberController: ${numberController},
 contactController: ${contactController},

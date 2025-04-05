@@ -1,12 +1,12 @@
 import 'package:data_grab/core/json/json.dart';
 import 'package:data_grab/modules/delivery/delivery.dart';
 import 'package:data_grab/modules/delivery/dtos/save_family_request_dto.dart';
-import 'package:data_grab/modules/home/controllers/controllers.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
 
 import '../../../core/core.dart';
+import '../../home/controllers/home_controller.dart';
 import '../models/models.dart';
 
 part 'delivery_controller.g.dart';
@@ -80,21 +80,6 @@ abstract class DeliveryControllerBase with Store, ControllerLifeCycle {
   ObservableList<DependentModel> dependents = ObservableList<DependentModel>();
 
   @observable
-  TextEditingController dependentNameController = TextEditingController();
-
-  @observable
-  TextEditingController dependentDocumentController = TextEditingController();
-
-  @observable
-  TextEditingController dependentBirthDayController = TextEditingController();
-
-  @observable
-  OptionModel? dependentSex;
-
-  @observable
-  OptionModel? dependentCommunity;
-
-  @observable
   PageController pageController = PageController();
 
   @observable
@@ -105,6 +90,9 @@ abstract class DeliveryControllerBase with Store, ControllerLifeCycle {
 
   @observable
   TextEditingController documentController = TextEditingController();
+
+  @observable
+  TextEditingController personNumberController = TextEditingController();
 
   @observable
   TextEditingController birthDayController = TextEditingController();
@@ -136,22 +124,10 @@ abstract class DeliveryControllerBase with Store, ControllerLifeCycle {
   }
 
   @action
-  void addDependent() {
-    dependents.add(DependentModel(
-      birthDay: dependentBirthDayController.text,
-      community: dependentCommunity?.name,
-      document: dependentDocumentController.text,
-      name: dependentNameController.text,
-      sex: dependentSex!.name,
-      familyId: null,
-    ));
-  }
-
-  @action
   Future<void> saveFamily() async {
     SaveFamilyRequestDto saveFamilyRequestDto = SaveFamilyRequestDto(
-      dependent: dependents,
       responsible: ResponsibleModel(
+        personNumber: personNumberController.text,
         sex: sex?.name ?? '',
         birthday: birthDayController.text,
         city: city?.name ?? '',
@@ -171,24 +147,29 @@ abstract class DeliveryControllerBase with Store, ControllerLifeCycle {
       "interviewer_name": _userStore.userModel!.name,
       "interviewer_document": _userStore.userModel!.document,
     };
-
-    await _deliveryRepository.saveFamily(interviewer).then(
-      (familyId) {
-        for (DependentModel dependent in saveFamilyRequestDto.dependent!) {
-          dependent.familyId = familyId;
-        }
-        saveFamilyRequestDto.responsible?.familyId = familyId;
-
-        _deliveryRepository
-            .saveResponsibleAndDependents(saveFamilyRequestDto, familyId)
-            .then(
-          (value) {
-            Modular.get<HomeController>().fetchDeliveries();
-            Modular.to.pop();
-          },
-        );
-      },
-    );
+    await _deliveryRepository
+        .saveOnlyResponsible(saveFamilyRequestDto)
+        .then((_) {
+      Modular.get<HomeController>().fetchDeliveries();
+      Modular.to.pop();
+    });
+    //await _deliveryRepository.saveFamily(interviewer).then(
+    //  (familyId) {
+    //    for (DependentModel dependent in saveFamilyRequestDto.dependent!) {
+    //      dependent.familyId = familyId;
+    //    }
+    //    saveFamilyRequestDto.responsible?.familyId = familyId;
+//
+    //    _deliveryRepository
+    //        .saveResponsibleAndDependents(saveFamilyRequestDto, familyId)
+    //        .then(
+    //      (value) {
+    //        Modular.get<HomeController>().fetchDeliveries();
+    //        Modular.to.pop();
+    //      },
+    //    );
+    //  },
+    //);
   }
 
   @action
@@ -199,13 +180,5 @@ abstract class DeliveryControllerBase with Store, ControllerLifeCycle {
       },
     );
     races.addAll(list);
-  }
-
-  void clearDependentFields() {
-    dependentNameController.clear();
-    dependentDocumentController.clear();
-    dependentBirthDayController.clear();
-    dependentSex = null;
-    dependentCommunity = null;
   }
 }

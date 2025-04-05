@@ -32,7 +32,7 @@ class DefaultButton extends StatelessWidget {
         children: [
           Text(label),
           SizedBox(width: 8.w),
-          Icon(icon ?? Icons.add),
+          Icon(icon ?? Icons.add, color: foregroundColor),
         ],
       ),
     );

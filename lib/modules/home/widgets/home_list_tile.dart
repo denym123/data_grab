@@ -5,14 +5,17 @@ class HomeListTile extends StatelessWidget {
   final VoidCallback onPressed;
   final String? responsibleName;
   final String? responsibleDocument;
-  final List<String>? children;
+  final String? personNumber;
+  final String? createdAt;
 
-  const HomeListTile(
-      {super.key,
-      required this.onPressed,
-      required this.responsibleName,
-      required this.responsibleDocument, this.children,
-      });
+  const HomeListTile({
+    super.key,
+    required this.onPressed,
+    required this.responsibleName,
+    required this.responsibleDocument,
+    required this.personNumber,
+    this.createdAt,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -71,11 +74,23 @@ class HomeListTile extends StatelessWidget {
                 ),
               ),
               Text(
-                children?.length.toString() ?? "",
+                personNumber ?? "",
                 style: context.textStyles.medium,
               ),
             ],
-          )
+          ),
+          Row(
+            children: [
+              Text(
+                "Data de criação: ",
+                style: context.textStyles.regular,
+              ),
+              Text(
+                responsibleName ?? "",
+                style: context.textStyles.regular,
+              ),
+            ],
+          ),
         ],
       ),
     );

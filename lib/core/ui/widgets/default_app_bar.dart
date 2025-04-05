@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 import '../../core.dart';
+
 class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   final bool hasDrawer;
@@ -24,8 +25,7 @@ class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
           fontSize: 16.sp,
         ),
       ),
-      actions: [
-      ],
+      actions: [],
       leading: Builder(builder: (context) {
         if (Modular.routerDelegate.canPop()) {
           return IconButton(

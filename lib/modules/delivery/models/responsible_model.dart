@@ -1,5 +1,6 @@
 class ResponsibleModel {
   int? id;
+  String? personNumber;
   int? familyId;
   String name;
   String document;
@@ -17,6 +18,7 @@ class ResponsibleModel {
     required this.sex,
     required this.neighbourhood,
     this.id,
+    required this.personNumber,
     required this.nationality,
     required this.birthday,
     required this.familyId,

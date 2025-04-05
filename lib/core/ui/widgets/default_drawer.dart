@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
-import '../../../modules/modules.dart';
 import '../../core.dart';
 
 class DefaultDrawer extends StatelessWidget {
@@ -29,8 +28,7 @@ class DefaultDrawer extends StatelessWidget {
                   style: context.textStyles.bold
                       .copyWith(color: Colors.white, fontSize: 20.sp),
                 ),
-                Text(
-                    Modular.get<UserStore>().userModel?.document ?? "Documento",
+                Text(Modular.get<UserStore>().userModel?.document ?? "",
                     style: context.textStyles.medium
                         .copyWith(color: Colors.white, fontSize: 16.sp)),
               ],
@@ -39,7 +37,7 @@ class DefaultDrawer extends StatelessWidget {
           SizedBox(height: 16.h),
           ListTile(
             onTap: () {
-              Modular.get<HomeController>().exportAllDeliveryDataToExcel();
+              // Modular.get<HomeController>().exportAllDeliveryDataToExcel();
             },
             title: Text(
               "Exportar tudo",
@@ -47,6 +45,19 @@ class DefaultDrawer extends StatelessWidget {
             ),
             leading: Icon(
               Icons.file_upload,
+              size: 24.r,
+            ),
+          ),
+          ListTile(
+            onTap: () {
+              launchUrlString("https://vedextecnologia.com/");
+            },
+            title: Text(
+              "Sobre nós",
+              style: context.textStyles.semiBold16,
+            ),
+            leading: Icon(
+              Icons.info,
               size: 24.r,
             ),
           ),

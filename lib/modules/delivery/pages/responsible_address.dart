@@ -91,16 +91,14 @@ class _ResponsibleAddressState extends State<ResponsibleAddress>
                     SizedBox(width: 24.h),
                     Expanded(
                       child: PrimaryButton(
-                          label: "Próximo",
-                          isLoading: false,
-                          onPressed: () {
-                            if (formKey.currentState!.validate()) {
-                              widget.controller.pageController.nextPage(
-                                duration: const Duration(milliseconds: 100),
-                                curve: Curves.bounceIn,
-                              );
-                            }
-                          }),
+                        label: "Próximo",
+                        isLoading: false,
+                        onPressed: () {
+                          if (formKey.currentState!.validate()) {
+                            widget.controller.saveFamily();
+                          }
+                        },
+                      ),
                     ),
                   ],
                 ),

@@ -1,70 +1,47 @@
 import 'package:sqflite_common/sqlite_api.dart';
 
-import '../../constants/tables.dart';
 import 'migrations.dart';
 
 class MigrationV1 implements Migration {
   @override
   void create(Batch batch) {
     batch.execute('''
-      CREATE table person (
+      CREATE table responsible (
         id INTEGER PRIMARY KEY,
+        person_number TEXT,
         name TEXT,
         document TEXT,
         birthday TEXT,
+        created_at TEXT,
         sex TEXT,
-        is_parent INTEGER,
         nationality TEXT,
         community TEXT,
         zip TEXT,
         city TEXT,
         neighborhood TEXT,
         street TEXT,
-        number TEXT,
-        family_id INTEGER,
-        FOREIGN KEY(family_id) REFERENCES family(id));
-    ''');
-
-    batch.execute('''
-      CREATE table family (
-        created_at TEXT,
-        id INTEGER PRIMARY KEY,
-        interviewer_name TEXT,
-        interviewer_document TEXT);
-    ''');
+        number TEXT);''');
   }
 
   @override
   void update(Batch batch) {
     batch.execute('''
-      CREATE table person (
+      CREATE table responsible (
         id INTEGER PRIMARY KEY,
+        person_number TEXT,
         name TEXT,
         document TEXT,
         birthday TEXT,
         sex TEXT,
-        is_parent INTEGER,
         nationality TEXT,
         community TEXT,
         zip TEXT,
         city TEXT,
         neighborhood TEXT,
         street TEXT,
-        number TEXT,
-        family_id INTEGER,
-        FOREIGN KEY(family_id) REFERENCES family(id));
-    ''');
-
-    batch.execute('''
-      CREATE table family (
         created_at TEXT,
-        id INTEGER PRIMARY KEY,
-        interviewer_name TEXT,
-        interviewer_document TEXT);
-    ''');
+        number TEXT);''');
   }
-}
-
 
 //Nome
 //Documento
@@ -76,3 +53,4 @@ class MigrationV1 implements Migration {
 //Cidade
 //Bairro
 //Rua
+}

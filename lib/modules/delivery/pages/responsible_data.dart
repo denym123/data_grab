@@ -1,4 +1,3 @@
-import 'package:data_grab/app/app_widget.dart';
 import 'package:data_grab/core/core.dart';
 import 'package:data_grab/core/ui/widgets/default_select.dart';
 import 'package:flutter/material.dart';
@@ -100,21 +99,29 @@ class _ResponsibleDataState extends State<ResponsibleData> with FormValidator {
                     widget.controller.community = p0;
                   },
                 ),
+                SizedBox(height: 24.h),
+                DefaultInputField(
+                  keyboardType: TextInputType.number,
+                  label: 'Total de pessoas na residência *',
+                  controller: widget.controller.personNumberController,
+                  validator: isNotEmpty,
+                ),
                 SizedBox(height: 32.h),
                 Row(
                   children: [
                     Expanded(
                       child: PrimaryButton(
-                          label: "Próximo",
-                          isLoading: false,
-                          onPressed: () {
-                            if (formKey.currentState!.validate()) {
-                              widget.controller.pageController.nextPage(
-                                duration: const Duration(milliseconds: 100),
-                                curve: Curves.bounceIn,
-                              );
-                            }
-                          }),
+                        label: "Próximo",
+                        isLoading: false,
+                        onPressed: () {
+                          if (formKey.currentState!.validate()) {
+                            widget.controller.pageController.nextPage(
+                              duration: const Duration(milliseconds: 100),
+                              curve: Curves.bounceIn,
+                            );
+                          }
+                        },
+                      ),
                     ),
                   ],
                 ),
