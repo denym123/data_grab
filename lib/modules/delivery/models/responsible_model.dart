@@ -34,4 +34,25 @@ class ResponsibleModel {
     required this.document,
     this.number,
   });
+
+  factory ResponsibleModel.fromJson(Map<String, dynamic> json) {
+    return ResponsibleModel(
+      id: json['id'],
+      personNumber: json['person_number'],
+      createdAt: json['created_at'],
+      interviewerName: json['interviewer_name'],
+      interviewerDocument: json['interviewer_document'],
+      name: json['name'],
+      document: json['document'],
+      birthday: json['birthday'],
+      nationality: json['nationality'],
+      community: json['community'],
+      zip: json['zip'],
+      city: json['city'],
+      neighbourhood: json['neighborhood'],
+      street: json['street'],
+      number: json['number'],
+      sex: json['sex'],
+    );
+  }
 }

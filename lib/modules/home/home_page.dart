@@ -40,7 +40,7 @@ class HomePageState extends PageLifeCycleState<HomeController, HomePage> {
                   backgroundColor: Color(0xff279629),
                   icon: Icons.upload_file_rounded,
                   onPressed: () {
-                    // controller.exportFilteredDeliveryDataToExcel();
+                    controller.exportResponsibleToExcel();
                   },
                 ),
               ],

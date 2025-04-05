@@ -141,6 +141,7 @@ abstract class DeliveryControllerBase with Store, ControllerLifeCycle {
         street: addressController.text,
         zip: cepController.text,
         number: numberController.text,
+        createdAt: DateTime.now().toIso8601String(),
       ),
     );
 
@@ -150,23 +151,6 @@ abstract class DeliveryControllerBase with Store, ControllerLifeCycle {
       Modular.get<HomeController>().fetchDeliveries();
       Modular.to.pop();
     });
-    //await _deliveryRepository.saveFamily(interviewer).then(
-    //  (familyId) {
-    //    for (DependentModel dependent in saveFamilyRequestDto.dependent!) {
-    //      dependent.familyId = familyId;
-    //    }
-    //    saveFamilyRequestDto.responsible?.familyId = familyId;
-//
-    //    _deliveryRepository
-    //        .saveResponsibleAndDependents(saveFamilyRequestDto, familyId)
-    //        .then(
-    //      (value) {
-    //        Modular.get<HomeController>().fetchDeliveries();
-    //        Modular.to.pop();
-    //      },
-    //    );
-    //  },
-    //);
   }
 
   @action

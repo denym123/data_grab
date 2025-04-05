@@ -1,5 +1,6 @@
 import 'package:data_grab/core/data_base/data_base.dart';
 
+import '../../delivery/models/responsible_model.dart';
 import '../home.dart';
 
 class HomeRepository {
@@ -15,11 +16,11 @@ class HomeRepository {
         .toList();
   }
 
-  Future<List<Delivery>> getCompleteDeliveries() async {
+  Future<List<ResponsibleModel>> getCompleteDeliveries() async {
     var conn = await SqliteConnectionFactory().openConnection();
 
     var result = await conn.query("responsible");
-    return result.map((e) => Delivery.fromJson(e)).toList();
+    return result.map((e) => ResponsibleModel.fromJson(e)).toList();
   }
 
 //  Future<List<DeliveryExportModel>> getCompleteDeliveries() async {
