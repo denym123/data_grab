@@ -49,7 +49,6 @@ abstract class HomeControllerBase with Store, ControllerLifeCycle {
     // Cabeçalhos
     List<String> headers = [
       "ID",
-      "Número de pessoas na residência", // <--- Alterado aqui
       "Nome do entrevistador",
       "Documento do entrevistador",
       "Nome",
@@ -63,7 +62,8 @@ abstract class HomeControllerBase with Store, ControllerLifeCycle {
       "Cidade",
       "Bairro",
       "Rua",
-      "Número"
+      "Número",
+      "Número de pessoas na residência", // <--- Alterado aqui
     ];
 
     for (var col = 0; col < headers.length; col++) {
@@ -78,7 +78,6 @@ abstract class HomeControllerBase with Store, ControllerLifeCycle {
     for (var r in responsibles) {
       List<String?> rowValues = [
         r.id.toString(),
-        r.personNumber,
         r.interviewerName,
         r.interviewerDocument,
         r.name,
@@ -92,7 +91,8 @@ abstract class HomeControllerBase with Store, ControllerLifeCycle {
         r.city,
         r.neighbourhood,
         r.street,
-        r.number
+        r.number,
+        r.personNumber,
       ];
 
       for (var col = 0; col < rowValues.length; col++) {
@@ -120,7 +120,6 @@ abstract class HomeControllerBase with Store, ControllerLifeCycle {
     deliveries.clear();
     await _homeRepository.fetchDeliveries().then((value) {
       List<Delivery> filteredList = value.where((element) {
-        var day = DateTime.now().day;
         var date = element.createdAt;
         return date?.day == DateTime.now().day;
       }).toList();
