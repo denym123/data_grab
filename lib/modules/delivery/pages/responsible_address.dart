@@ -91,7 +91,7 @@ class _ResponsibleAddressState extends State<ResponsibleAddress>
                     SizedBox(width: 24.h),
                     Expanded(
                       child: PrimaryButton(
-                        label: "Próximo",
+                        label: "Finalizar",
                         isLoading: false,
                         onPressed: () {
                           if (formKey.currentState!.validate()) {

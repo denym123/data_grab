@@ -30,10 +30,21 @@ abstract class HomeControllerBase with Store, ControllerLifeCycle {
   @observable
   bool isLoading = false;
 
-  Future<void> exportResponsibleToExcel() async {
+  Future<void> exportResponsibleToExcel({bool filterToday = false}) async {
     // Recupera os dados da tabela responsible
     List<ResponsibleModel> responsibles =
         await _homeRepository.getCompleteDeliveries();
+
+    if (filterToday) {
+      DateTime today = DateTime.now();
+
+      responsibles = responsibles.where((r) {
+        DateTime createdDate = DateFormat("yyyy-MM-dd").parse(r.createdAt!);
+        return createdDate.year == today.year &&
+            createdDate.month == today.month &&
+            createdDate.day == today.day;
+      }).toList();
+    }
 
     var excel = Excel.createExcel();
     var sheet = excel['Responsáveis'];
@@ -63,7 +74,7 @@ abstract class HomeControllerBase with Store, ControllerLifeCycle {
       "Bairro",
       "Rua",
       "Número",
-      "Número de pessoas na residência", // <--- Alterado aqui
+      "Número de pessoas na residência",
     ];
 
     for (var col = 0; col < headers.length; col++) {

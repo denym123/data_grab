@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
+import '../../../modules/home/controllers/home_controller.dart';
 import '../../core.dart';
 
 class DefaultDrawer extends StatelessWidget {
@@ -37,7 +38,8 @@ class DefaultDrawer extends StatelessWidget {
           SizedBox(height: 16.h),
           ListTile(
             onTap: () {
-              // Modular.get<HomeController>().exportAllDeliveryDataToExcel();
+              Modular.get<HomeController>()
+                  .exportResponsibleToExcel(filterToday: false);
             },
             title: Text(
               "Exportar tudo",

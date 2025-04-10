@@ -21,8 +21,8 @@ class HomeListTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
-        padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
-        minimumSize: Size(double.infinity, 48.h),
+        alignment: Alignment.centerLeft,
+        padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 16.w),
         backgroundColor: Colors.white,
         foregroundColor: Colors.black,
         shape: RoundedRectangleBorder(
@@ -35,61 +35,83 @@ class HomeListTile extends StatelessWidget {
       ),
       onPressed: onPressed,
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            children: [
-              Text(
-                "Responsável: ",
-                style: context.textStyles.medium.copyWith(
-                  fontWeight: FontWeight.w900,
+          RichText(
+            text: TextSpan(
+              style: context.textStyles.medium.copyWith(
+                color: Colors.black,
+              ),
+              children: [
+                TextSpan(
+                  text: "Responsável: ",
+                  style: context.textStyles.medium.copyWith(
+                    fontWeight: FontWeight.w900,
+                  ),
                 ),
-              ),
-              Text(
-                responsibleName ?? "",
-                style: context.textStyles.medium,
-              ),
-            ],
-          ),
-          Row(
-            children: [
-              Text(
-                "Documento: ",
-                style: context.textStyles.medium.copyWith(
-                  fontWeight: FontWeight.w900,
+                TextSpan(
+                  text: responsibleName ?? "",
                 ),
-              ),
-              Text(
-                responsibleDocument ?? "",
-                style: context.textStyles.medium,
-              ),
-            ],
+              ],
+            ),
           ),
-          Row(
-            children: [
-              Text(
-                "Quantidade de dependentes: ",
-                style: context.textStyles.medium.copyWith(
-                  fontWeight: FontWeight.w900,
+          SizedBox(height: 4.h),
+          RichText(
+            text: TextSpan(
+              style: context.textStyles.medium.copyWith(
+                color: Colors.black,
+              ),
+              children: [
+                TextSpan(
+                  text: "Documento: ",
+                  style: context.textStyles.medium.copyWith(
+                    fontWeight: FontWeight.w900,
+                  ),
                 ),
-              ),
-              Text(
-                personNumber ?? "",
-                style: context.textStyles.medium,
-              ),
-            ],
+                TextSpan(
+                  text: responsibleDocument ?? "",
+                ),
+              ],
+            ),
           ),
-          Row(
-            children: [
-              Text(
-                "Data de criação: ",
-                style: context.textStyles.regular,
+          SizedBox(height: 4.h),
+          RichText(
+            text: TextSpan(
+              style: context.textStyles.medium.copyWith(
+                color: Colors.black,
               ),
-              Text(
-                responsibleName ?? "",
-                style: context.textStyles.regular,
+              children: [
+                TextSpan(
+                  text: "Quantidade de dependentes: ",
+                  style: context.textStyles.medium.copyWith(
+                    fontWeight: FontWeight.w900,
+                  ),
+                ),
+                TextSpan(
+                  text: personNumber ?? "",
+                ),
+              ],
+            ),
+          ),
+          SizedBox(height: 4.h),
+          RichText(
+            text: TextSpan(
+              style: context.textStyles.medium.copyWith(
+                color: Colors.black,
               ),
-            ],
+              children: [
+                TextSpan(
+                  text: "Data de criação: ",
+                  style: context.textStyles.medium.copyWith(
+                    fontWeight: FontWeight.w900,
+                  ),
+                ),
+                TextSpan(
+                  text: createdAt ?? "",
+                ),
+              ],
+            ),
           ),
         ],
       ),

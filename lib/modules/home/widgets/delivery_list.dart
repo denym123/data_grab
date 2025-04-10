@@ -1,6 +1,7 @@
 import 'package:data_grab/core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:intl/intl.dart';
 
 import '../home.dart';
 
@@ -28,6 +29,11 @@ class DeliveryList extends StatelessWidget {
                         responsibleName: delivery.responsibleName,
                         responsibleDocument: delivery.responsibleDocument,
                         personNumber: delivery.personNumber,
+                        createdAt: delivery.createdAt != null
+                            ? DateFormat('dd/MM/yyyy - HH:mm').format(
+                                delivery.createdAt!,
+                              )
+                            : "",
                       );
                     },
                     separatorBuilder: (context, index) {

@@ -6,9 +6,10 @@ import '../home.dart';
 class HomeRepository {
   Future<List<Delivery>> fetchDeliveries() async {
     var conn = await SqliteConnectionFactory().openConnection();
-    var query = await conn.query("responsible",
-        columns: ['name', 'document', 'created_at', 'person_number'],
-        where: '');
+    var query = await conn.query(
+      "responsible",
+      columns: ['name', 'document', 'created_at', 'person_number'],
+    );
     return query
         .toList()
         .map(
