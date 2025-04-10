@@ -151,6 +151,7 @@ abstract class DeliveryControllerBase with Store, ControllerLifeCycle {
           .saveOnlyResponsible(saveFamilyRequestDto)
           .then((_) {
         Modular.get<HomeController>().fetchDeliveries();
+        Modular.to.pop();
       });
     } on DatabaseException catch (e) {
       if (e.isUniqueConstraintError()) {
