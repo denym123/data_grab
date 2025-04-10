@@ -12,7 +12,7 @@ class MigrationV1 implements Migration {
         interviewer_name TEXT,
         interviewer_document TEXT,
         name TEXT,
-        document TEXT,
+        document TEXT UNIQUE,
         birthday TEXT,
         created_at TEXT,
         sex TEXT,

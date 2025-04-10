@@ -4,9 +4,10 @@ import 'package:data_grab/modules/delivery/dtos/save_family_request_dto.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
+import 'package:sqflite/sqflite.dart';
 
 import '../../../core/core.dart';
-import '../../home/controllers/home_controller.dart';
+import '../../home/home.dart';
 import '../models/models.dart';
 
 part 'delivery_controller.g.dart';
@@ -145,12 +146,18 @@ abstract class DeliveryControllerBase with Store, ControllerLifeCycle {
       ),
     );
 
-    await _deliveryRepository
-        .saveOnlyResponsible(saveFamilyRequestDto)
-        .then((_) {
-      Modular.get<HomeController>().fetchDeliveries();
-      Modular.to.pop();
-    });
+    try {
+      await _deliveryRepository
+          .saveOnlyResponsible(saveFamilyRequestDto)
+          .then((_) {
+        Modular.get<HomeController>().fetchDeliveries();
+      });
+    } on DatabaseException catch (e) {
+      if (e.isUniqueConstraintError()) {
+        Messages.alert(
+            "Não é permitido salvar mais de uma pessoa com o mesmo documento");
+      }
+    }
   }
 
   @action
